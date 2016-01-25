@@ -1,2 +1,3 @@
-# suit
-The core framework to create your MVC application.
+# Suit Framework
+
+A confortable MVC framework to walk around.

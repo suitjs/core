@@ -1,0 +1,14 @@
+{
+  "name": "suithx",
+  "url": "https://github.com/suitjs/suit",
+  "license": "MIT",
+  "tags": ["mvc","model","view","controller","mutation","bind"],
+  "description": "A confortable mvc framework.",
+  "version": "1.0.0",
+  "releasenotes": "1.0.0",
+  "contributors": ["eduardo-costa"],
+  "dependencies": 
+  {
+	  
+  }
+}
