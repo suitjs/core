@@ -14,6 +14,8 @@ import js.html.NodeList;
  */
 class SuitView
 {	
+	
+	public var components : Array<Dynamic>;
 	/**
 	 * Blocks the mutation handling while components are parsed.
 	 */
@@ -24,6 +26,7 @@ class SuitView
 	 */
 	public function new() 
 	{
+		components = [];
 		/*
 		m_mutation_lock = false;
 		if (untyped (window.MutationObserver != null))

@@ -1,4 +1,5 @@
 package js.suit;
+import haxe.Json;
 import js.html.ArrayBuffer;
 import js.html.Blob;
 import js.html.Event;
@@ -78,12 +79,21 @@ class SuitRequest
 			if (Std.is(p_data, String))		 ld.send(p_data); else
 			if (Std.is(p_data, FormData))	 ld.send(p_data); else
 			{
-				var fd : FormData 		= new FormData();
-				var fl : Array<String> 	= Reflect.fields(p_data);
-				for (i in 0...fl.length) fd.append(fl[i], Reflect.getProperty(p_data, fl[i]));
-				ld.send(fd);
-			}
-			
+				try
+				{
+					//Try to parse the data as json
+					var json : String = Json.stringify(p_data, null, null);
+					ld.send(json);
+				}
+				catch (err:Error)
+				{
+					//If any error handle as a FormData somehow.
+					var fd : FormData 		= new FormData();
+					var fl : Array<String> 	= Reflect.fields(p_data);
+					for (i in 0...fl.length) fd.append(fl[i], Reflect.getProperty(p_data, fl[i]));
+					ld.send(fd);
+				}				
+			}			
 		}
 		else
 		{

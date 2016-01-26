@@ -1,3 +1,3 @@
-# Suit Framework
+# Suit
 
-A confortable MVC framework to walk around.
+A confortable MVC framework.

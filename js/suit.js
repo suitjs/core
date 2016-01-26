@@ -199,16 +199,21 @@ js_suit_SuitRequest.prototype = {
 		}
 		ld.open(method,p_url,true);
 		if(p_data != null) {
-			if(js_Boot.__instanceof(p_data,ArrayBuffer)) ld.send(p_data); else if(js_Boot.__instanceof(p_data,Blob)) ld.send(p_data); else if(typeof(p_data) == "string") ld.send(p_data); else if(js_Boot.__instanceof(p_data,FormData)) ld.send(p_data); else {
-				var fd = new FormData();
-				var fl1 = Reflect.fields(p_data);
-				var _g11 = 0;
-				var _g2 = fl1.length;
-				while(_g11 < _g2) {
-					var i1 = _g11++;
-					fd.append(fl1[i1],Reflect.getProperty(p_data,fl1[i1]));
-				}
-				ld.send(fd);
+			if(js_Boot.__instanceof(p_data,ArrayBuffer)) ld.send(p_data); else if(js_Boot.__instanceof(p_data,Blob)) ld.send(p_data); else if(typeof(p_data) == "string") ld.send(p_data); else if(js_Boot.__instanceof(p_data,FormData)) ld.send(p_data); else try {
+				var json = JSON.stringify(p_data,null,null);
+				ld.send(json);
+			} catch( err ) {
+				if( js_Boot.__instanceof(err,Error) ) {
+					var fd = new FormData();
+					var fl1 = Reflect.fields(p_data);
+					var _g11 = 0;
+					var _g2 = fl1.length;
+					while(_g11 < _g2) {
+						var i1 = _g11++;
+						fd.append(fl1[i1],Reflect.getProperty(p_data,fl1[i1]));
+					}
+					ld.send(fd);
+				} else throw(err);
 			}
 		} else ld.send();
 		return ld;
@@ -389,6 +394,7 @@ js_suit_model_SuitModel.prototype = {
 	,__class__: js_suit_model_SuitModel
 };
 var js_suit_view_SuitView = function() {
+	this.components = [];
 };
 js_suit_view_SuitView.__name__ = true;
 js_suit_view_SuitView.prototype = {
