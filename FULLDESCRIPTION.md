@@ -1,6 +1,6 @@
 # Suit Framework
 
-A confortable MVC framework to walk around.
+The confortable MVC framework to walk around.
 
 * Name your Views  
 * Add your Controllers  

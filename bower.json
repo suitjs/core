@@ -5,7 +5,7 @@
     "Eduardo Dias da Costa <eduardo@thelaborat.org>",
 	"Gustavo Allebrandt <gustavoallebrandt@gmail.com>",
   ],
-  "description": "A confortable MVC framework.",
+  "description": "The confortable MVC framework.",
   "main": ["js/suit.js"],
   "moduleType": [],
   "keywords": [
@@ -24,18 +24,12 @@
 	"**/.*",
 	"old/",
 	"node_modules/",
-	"bower_components/",
-	"source/",	
+	"bower_components/",			
 	"*.hxproj",
-	"Main.hx",
 	"*.hx",
 	"*.md",
-	"*.html",
-	"test.html",	
-	"README.md",
-	"bower.json",
-	"haxelib.json",
-	"LICENSE"	
+	"*.html",	
+	"*.json"		
   ],
 
   "license": "MIT",
