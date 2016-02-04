@@ -6,6 +6,7 @@
   "description": "A confortable mvc framework.",
   "version": "1.0.0",
   "releasenotes": "1.0.0",
+  "classPath": "haxe/",
   "contributors": ["eduardo-costa"],
   "dependencies": 
   {

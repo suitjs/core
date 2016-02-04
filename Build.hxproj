@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="js\suit.js" />
+    <movie path="js\suit-haxe.js" />
     <movie fps="0" />
     <movie width="0" />
     <movie height="0" />
@@ -43,6 +43,7 @@
     <compile path="WebBundleTest.hx" />
     <compile path="HaxeTest.hx" />
     <compile path="source\Main.hx" />
+    <compile path="haxe\Main.hx" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>

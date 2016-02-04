@@ -2,4 +2,6 @@ node_modules
 npm-debug.log
 *.bat
 *.html
+suit-haxe.js
+Main.hx
 old/
