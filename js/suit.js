@@ -338,7 +338,7 @@ window.Suit =
 				if (s == "blur")  bb = true;			
 				v.addEventListener(s, t.handler,bb);
 			}
-			list.push(t);
+			Suit.controller.list.push(t);
 			return t;
 		},
 
@@ -358,9 +358,9 @@ window.Suit =
 				}						
 			}
 			t.view = null;
-			var idx = list.indexOf(t);
+			var idx = Suit.controller.list.indexOf(t);
 			if(idx<0)return t;
-			list.splice(idx,1);
+			Suit.controller.list.splice(idx,1);
 			return t;
 		},
 
