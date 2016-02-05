@@ -81,20 +81,7 @@ function m_modelDataTraverseCb(e,a) {
 	}				
 };
 
-/**
-Utility function to avoid new 'function' instances while searching.
-//*/
-var m_modelGetTraverseCb =
-function m_modelGetTraverseCb(e,a) {	
 
-	if (a.name == Suit.view.name(e)) {
-
-		a.found  = true;
-		a.it 	 = e;
-		return false;
-	}
-	return true;			
-};
 
 /**
 Get/Set a View's data in object format.
@@ -181,6 +168,21 @@ Class that implements the View functionalities.
 */
 
 /**
+Utility function to avoid new 'function' instances while searching.
+//*/
+var m_viewGetTraverseCb =
+function m_viewGetTraverseCb(e,a) {	
+
+	if (a.name == Suit.view.name(e)) {
+
+		a.found  = true;
+		a.it 	 = e;
+		return false;
+	}
+	return true;			
+};
+
+/**
 Variable that defines the naming style of the views.
 //*/
 var m_viewNameAttrib = "n";
@@ -225,7 +227,7 @@ function viewGet(p_target,p_root) {
 
 		a.name  = l.shift();
 		a.found = false;				
-		Suit.view.traverse(a.it,m_modelGetTraverseCb,false,a);
+		Suit.view.traverse(a.it,m_viewGetTraverseCb,false,a);
 		if(!a.found) return null;				
 
 	}
@@ -650,4 +652,4 @@ return {
 
 
 	
-})(window,document,window.body);
+})(window,document,document.body);
