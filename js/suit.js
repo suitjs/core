@@ -2,6 +2,7 @@
 Class that implements the Suit's core framework features.
 //*/
 var Suit = 
+window.Suit =
 (function(window,document,body) {
 
 "use strict"; 	
