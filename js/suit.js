@@ -6,7 +6,7 @@ var Suit =
 
 "use strict"; 	
 
-console.log("SuitJS> Init v1.0.0");
+console.log("Suit> Init v1.0.0");
 
 /**
 Checks the validity of a value or if it matches the specified type then returns itself or a default value.
@@ -43,11 +43,11 @@ function m_modelDataTraverseCb(e,a) {
 	var it = e;
 	if (Suit.isNullOrEmpty(Suit.view.name(it))) return;
 	
-	var has_children = true;
-	if (it.children.length <= 0) 				has_children = false;
-	if (it.nodeName.toLowerCase() == "select")  has_children = false;
+	var hasChildren = true;
+	if (it.children.length <= 0) 				hasChildren = false;
+	if (it.nodeName.toLowerCase() == "select")  hasChildren = false;
 
-	if (!has_children)	{					
+	if (!hasChildren)	{					
 
 		var path = Suit.view.path(it, a.target);
 		var tks  = path.split(".");
@@ -380,7 +380,7 @@ function controllerAdd(p_target,p_view) {
 	if (t.handler == null) {
 
 		t.handler = 
-		function controller_handler(e) {
+		function controllerHandler(e) {
 
 			if (!t.enabled) return;
 			var cev     = { };
