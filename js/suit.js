@@ -3,6 +3,67 @@
 "use strict"; 	
 
 /**
+Internal callback for 'data' method traversing.
+//*/
+var __data_traverse_cb =
+function __data_traverse_cb(e,a)
+{
+	var it = e;
+	if (Suit.isNullOrEmpty(Suit.view.name(it))) return;
+	
+	var has_children = true;
+	if (it.children.length <= 0) 				has_children = false;
+	if (it.nodeName.toLowerCase() == "select")  has_children = false;
+
+	if (!has_children)
+	{					
+		var path = Suit.view.path(it, a.target);
+		var tks  = path.split(".");
+		var d  = a.res;
+		var dv = a.value;
+		for (var i=0;i<tks.length;i++)
+		{
+			if (i >= (tks.length - 1))
+			{						
+				if(tks[i]=="")
+				{
+					Suit.model.value(it,dv==null ? dv : a.value);
+					if(dv!=null) a.res = a.value;
+				}
+				else
+				{
+					d[tks[i]] = Suit.model.value(it,dv==null ? dv : dv[tks[i]]);
+				}
+			}
+			else
+			{
+				if (dv != null) dv = dv[tks[i]];						
+				if (d[tks[i]] == null) d[tks[i]] = {};
+				d = d[tks[i]];
+			}
+		}
+	}				
+};
+
+
+/**
+Utility function to avoid new 'function' instances while searching.
+//*/
+var __get_traverse_cb =
+function __get_traverse_cb(e,a)
+{	
+	if (a.name == Suit.view.name(e))
+	{
+		a.found  = true;
+		a.it 	 = e;
+		return false;
+	}
+	return true;			
+};
+
+
+
+/**
 Class that implements the Suit's core framework features.
 //*/
 var Suit =
@@ -24,7 +85,7 @@ window.Suit =
 			a.res    = {};
 			a.value  = p_value;
 			a.target = t;
-			Suit.view.traverse(t,Suit.model.__data_traverse_cb,false,a);
+			Suit.view.traverse(t,__data_traverse_cb,false,a);
 			return a.res;
 
 		},
@@ -74,48 +135,7 @@ window.Suit =
 			}		
 			return "";
 		},
-
-		/**
-		Internal callback for 'data' method traversing.
-		//*/
-		__data_traverse_cb: function __data_traverse_cb(e,a)
-		{
-			var it = e;
-			if (Suit.isNullOrEmpty(Suit.view.name(it))) return;
-			
-			var has_children = true;
-			if (it.children.length <= 0) 				has_children = false;
-			if (it.nodeName.toLowerCase() == "select")  has_children = false;
-
-			if (!has_children)
-			{					
-				var path = Suit.view.path(it, a.target);
-				var tks  = path.split(".");
-				var d  = a.res;
-				var dv = a.value;
-				for (var i=0;i<tks.length;i++)
-				{
-					if (i >= (tks.length - 1))
-					{						
-						if(tks[i]=="")
-						{
-							Suit.model.value(it,dv==null ? dv : a.value);
-							if(dv!=null) a.res = a.value;
-						}
-						else
-						{
-							d[tks[i]] = Suit.model.value(it,dv==null ? dv : dv[tks[i]]);
-						}
-					}
-					else
-					{
-						if (dv != null) dv = dv[tks[i]];						
-						if (d[tks[i]] == null) d[tks[i]] = {};
-						d = d[tks[i]];
-					}
-				}
-			}				
-		},
+		
 	},
 
 	/**
@@ -164,7 +184,7 @@ window.Suit =
 			{				
 				a.name  = l.shift();
 				a.found = false;				
-				Suit.view.traverse(a.it,Suit.view.__get_traverse_cb,false,a);
+				Suit.view.traverse(a.it,__get_traverse_cb,false,a);
 				if(!a.found) return null;				
 			}
 
@@ -266,20 +286,6 @@ window.Suit =
 			}
 			if (p_callback(t,p_args)==false) return;
 			for (var i=0; i<t.children.length;i++) Suit.view.traverse(t.children[i], p_callback,p_bfs,p_args);
-		},
-
-		/**
-		Utility function to avoid new 'function' instances while searching.
-		//*/
-		__get_traverse_cb: function(e,a)
-		{	
-			if (a.name == Suit.view.name(e))
-			{
-				a.found  = true;
-				a.it 	 = e;
-				return false;
-			}
-			return true;			
 		},
 	},
 
