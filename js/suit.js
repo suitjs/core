@@ -5,8 +5,8 @@
 /**
 Internal callback for 'data' method traversing.
 //*/
-var __data_traverse_cb =
-function __data_traverse_cb(e,a)
+var _data_traverse_cb =
+function _data_traverse_cb(e,a)
 {
 	var it = e;
 	if (Suit.isNullOrEmpty(Suit.view.name(it))) return;
@@ -49,8 +49,8 @@ function __data_traverse_cb(e,a)
 /**
 Utility function to avoid new 'function' instances while searching.
 //*/
-var __get_traverse_cb =
-function __get_traverse_cb(e,a)
+var _get_traverse_cb =
+function _get_traverse_cb(e,a)
 {	
 	if (a.name == Suit.view.name(e))
 	{
