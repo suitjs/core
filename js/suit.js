@@ -455,7 +455,7 @@ function controllerDispatch(p_path,p_data) {
 	var aidx  = p_path.indexOf("@");
 	var splt  = aidx >= 0 ? p_path.split("@") : [];
 	cev.type  = aidx >= 0 ? splt.pop() : "";
-	cev.view  = aidx >= 0 ? splt.shift() : "";			
+	cev.view  = aidx >= 0 ? splt.shift() : "";				
 	cev.src   = null;				
 	cev.data  = p_data;
 	var l = Suit.controller.list;
@@ -481,6 +481,46 @@ Class that implements requests utility functions.
 */
 
 /**
+Receives a ProgressEvent and returns the normalized progress scaled by a factor.
+//*/
+var m_requestGetProgress = 
+function requestGetProgress(p_event,p_scale) {
+	return (p_event.total <= 0? 0 : p_event.loaded / (p_event.total + 5)) * p_scale;
+};
+
+/**
+Invokes the Suit Request's callback or dispatches a controller event.
+//*/
+var m_requestCallbackInvoke =
+function requestCallbackInvoke(p_callback,p_is_string,p_data,p_progress,p_event) {
+
+	if(p_callback==null) return;
+
+	if(p_is_string) {
+
+		var type = "";
+
+		var d = { event: p_event, progress: p_progress, data: p_data };
+
+		switch(p_event.type) {
+
+			case "progress": type = p_progress<=0.0 ? "upload" : "progress"; break;
+			case "load": 	 type = p_data==null ? "error" : "complete"; break;
+			case "error": 	 type = "error"; break;
+
+		}
+
+		if(type=="upload") d.progress += 1.0;
+
+		Suit.controller.dispatch(p_callback+"@"+type,d);
+		return;
+	}	
+
+	p_callback(p_data,p_progress,p_event);
+};
+
+
+/**
 Create and execute a XmlHttpRequest and invokes the callback with the needed feedback of the process.
 //*/
 var m_requestCreate =
@@ -489,22 +529,41 @@ function requestCreate(p_method,p_url,p_callback,p_response, p_data,p_headers) {
 	var method   = Suit.assert(p_method,"get");
 	var response = Suit.assert(p_response,"text").toLowerCase();
 	var ld       = new XMLHttpRequest();
+	var isCbStr  = typeof(p_callback)=="string";
+	var cb       = p_callback;
+
+	var isFirstUpload   = true;
+	var isFirstProgress = true;
 
 	if(response=="arraybuffer") if(ld.overrideMimeType != null) {  ld.overrideMimeType("application/octet-stream");  }			
 	
 	ld.responseType = response;	
 
-	ld.onprogress = function reqProgress(e) { var p = (e.total <= 0? 0 : e.loaded / (e.total + 5)) * 0.9999; if(p_callback!=null) p_callback(null,p,e); };
+	ld.onprogress = 
+	function reqProgress(e) { 
+
+		if(isFirstProgress) { 
+
+			if(p_data!=null) { m_requestCallbackInvoke(cb,isCbStr,null,0.0,e); }
+			isFirstProgress=false; 
+			m_requestCallbackInvoke(cb,isCbStr,null,0.000001,e);  			
+		}
+		var p = m_requestGetProgress(e,0.9999); m_requestCallbackInvoke(cb,isCbStr,null,p,e); 
+	};
 	
 	ld.upload.onprogress = 
 	function reqUploadProgress(e)  {
 
-		if(p_data!=null) { var p = (e.total <= 0? 0 : e.loaded / (e.total + 5)) * 0.9999; if(p_callback!=null) p_callback(null,-(1.0-p),e); }
+		if(p_data!=null) { 
+
+			if(isFirstUpload) { isFirstUpload=false; m_requestCallbackInvoke(cb,isCbStr,null,-1.0,e);  }
+			var p = m_requestGetProgress(e,0.9999); m_requestCallbackInvoke(cb,isCbStr,null,-(1.0-p),e); 
+		}
 
 	};
 	
-	ld.onload  = function reqOnLoad(e) { if(p_callback!=null) p_callback((response=="arraybuffer") ? new Uint8Array(ld.response) : ld.response,1.0,e); };
-	ld.onerror = function reqOnError(e){ if(p_callback!=null) p_callback(null,1.0,e); };
+	ld.onload  = function reqOnLoad(e)  { m_requestCallbackInvoke(cb,isCbStr,(response=="arraybuffer") ? new Uint8Array(ld.response) : ld.response,1.0,e); };
+	ld.onerror = function reqOnError(e) { m_requestCallbackInvoke(cb,isCbStr,null,1.0,e); };
 	
 	if (p_headers != null) {				
 
@@ -537,7 +596,8 @@ function requestCreate(p_method,p_url,p_callback,p_response, p_data,p_headers) {
 				ld.send(fd);
 
 			}				
-		}			
+		}	
+
 	}
 	else {
 

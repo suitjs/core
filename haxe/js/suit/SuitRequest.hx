@@ -27,6 +27,7 @@ extern class SuitRequest
 	 * @param	p_headers
 	 * @return
 	 */
+	@:overload(function (p_method:String, p_url:String, p_callback : String, p_response:String = "text", p_data:Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest{})
 	public function create(p_method:String, p_url:String, p_callback : Dynamic->Float->Event->Void, p_response:String = "text", p_data:Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest;
 	
 	/**
@@ -36,6 +37,7 @@ extern class SuitRequest
 	 * @param	p_data
 	 * @return
 	 */
+	@:overload(function (p_url:String, p_callback : String, p_data:Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest{})
 	public function get(p_url:String, p_callback : String->Float->Event->Void, p_data : Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest;
 	
 	/**
@@ -45,6 +47,7 @@ extern class SuitRequest
 	 * @param	p_data
 	 * @return
 	 */
+	@:overload(function (p_url:String, p_callback : String, p_data:Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest{})
 	public function post(p_url:String, p_callback : String->Float->Event->Void,p_data : Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest;
 	
 	/**
@@ -82,6 +85,7 @@ extern class SuitRequestBinary
 	 * @param	p_data
 	 * @return
 	 */
+	@:overload(function (p_url:String, p_callback : String, p_data:Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest{})
 	public function get(p_url:String, p_callback : Uint8Array->Float->Event->Void, p_data : Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest;
 	
 	/**
@@ -91,6 +95,7 @@ extern class SuitRequestBinary
 	 * @param	p_data
 	 * @return
 	 */
+	@:overload(function (p_url:String, p_callback : String, p_data:Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest{})
 	public function post(p_url:String, p_callback : Uint8Array->Float->Event->Void,p_data : Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest;
 }
 
@@ -106,6 +111,7 @@ extern class SuitRequestBlob
 	 * @param	p_data
 	 * @return
 	 */
+	@:overload(function (p_url:String, p_callback : String, p_data:Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest{})
 	public function get(p_url:String, p_callback : Blob->Float->Event->Void, p_data : Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest;
 	
 	/**
@@ -115,6 +121,7 @@ extern class SuitRequestBlob
 	 * @param	p_data
 	 * @return
 	 */
+	@:overload(function (p_url:String, p_callback : String, p_data:Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest{})
 	public function post(p_url:String, p_callback : Blob->Float->Event->Void,p_data : Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest;
 }
 
@@ -130,6 +137,7 @@ extern class SuitRequestJson
 	 * @param	p_data
 	 * @return
 	 */
+	@:overload(function (p_url:String, p_callback : String, p_data:Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest{})
 	public function get(p_url:String, p_callback : Dynamic->Float->Event->Void, p_data : Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest;
 	
 	/**
@@ -139,6 +147,7 @@ extern class SuitRequestJson
 	 * @param	p_data
 	 * @return
 	 */
+	@:overload(function (p_url:String, p_callback : String, p_data:Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest{})
 	public function post(p_url:String, p_callback : Dynamic->Float->Event->Void,p_data : Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest;
 }
 
@@ -154,6 +163,7 @@ extern class SuitRequestDocument
 	 * @param	p_data
 	 * @return
 	 */
+	@:overload(function (p_url:String, p_callback : String, p_data:Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest{})
 	public function get(p_url:String, p_callback : Document->Float->Event->Void, p_data : Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest;
 	
 	/**
@@ -163,5 +173,6 @@ extern class SuitRequestDocument
 	 * @param	p_data
 	 * @return
 	 */
+	@:overload(function (p_url:String, p_callback : String, p_data:Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest{})
 	public function post(p_url:String, p_callback : Document->Float->Event->Void,p_data : Dynamic = null, p_headers:Dynamic = null):XMLHttpRequest;
 }
