@@ -23,8 +23,9 @@ var owl = null;
 window.addEventListener("load",
 owl = function onSuitWindowLoad(e)
 {		
-	setTimeout(function delayedComponentEvent() { window.dispatchEvent(new Event("component"));	}, 1);
+	setTimeout(function delayedComponentEvent() { window.dispatchEvent(new Event("component")); Suit.controller.dispatch("load"); }, 1);
 	window.removeEventListener("load",owl);
+
 });
 
 /*
@@ -388,7 +389,7 @@ function controllerAdd(p_target,p_view) {
 			var cev     = { };
 			cev.type 	= e.type;
 			cev.src     = e;
-			cev.view    = (e.target instanceof HTMLElement) ? Suit.view.path(e.target,v.parentElement) : "";
+			cev.view    = (e.target instanceof HTMLElement) ? Suit.view.path(e.target,v) : "";
 			cev.path	= cev.view == "" ? e.type : (e.type=="" ? cev.view : (cev.view + "@" + e.type));
 			cev.data    = null;
 			if(t.on!=null)t.on(cev);
