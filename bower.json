@@ -5,7 +5,7 @@
     "Eduardo Dias da Costa <eduardo@thelaborat.org>",
 	"Gustavo Allebrandt <gustavoallebrandt@gmail.com>",
   ],
-  "description": "The confortable MVC framework.",
+  "description": "A comfortable MVC framework.",
   "main": ["js/suit.js"],
   "moduleType": [],
   "keywords": [
