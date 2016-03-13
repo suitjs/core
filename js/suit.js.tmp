@@ -1,8 +1,5 @@
-/**
- * Class that implements the Suit's core framework features.
- * @class
- */
-var Suit =
+/** Class that implements the Suit's core framework features. */
+var Suit = 
 (function(window,document,body) {
 
 "use strict"; 	
@@ -83,6 +80,11 @@ function m_modelDataTraverseCb(e,a) {
 	}				
 };
 
+
+
+/**
+Get/Set a View's data in object format.
+//*/
 var m_modelData = 
 function modelData(p_target,p_value) {
 
@@ -637,45 +639,14 @@ var m_requestJsonPost =  function requestJsonPost(p_url,p_callback,p_data,p_head
 
 return {
 	
-	/** 
-	* Reference to the container of Model features.
-	* @class
-	* @memberof Suit	
-	*/
 	model: {
 
-		
-		/**
-		 * Get/Set a View's data in object format.		 
-		 * @function
-		 * @param {String|DOMElement} target - Path or reference to the target.
-		 * @param {?Objet} value - Value to set the target or null if the method must only return the value.
-		 * @return {Object} - Returns the Object formatted data of the Element instance.
-		 */
 		data:  m_modelData,
-
-		/**
-		 * Get/Set the correct 'value' of a given DOMElement.
-		 * @function
-		 * @param {String} target - Path or reference to the target.
-		 * @param {?Objet} value  - Value to set the target or null if the method must only return the value.
-		 * @return {String|Number|Object} - Returns the raw value of the Element.
-		 */
 		value: m_modelValue,		
 	},
-	
-	
-	/** 	
-	* Reference to the container of View features.
-	* @class
-	* @memberof Suit	
-	*/
+
 	view: {
 
-		/**
-	     * Default name attribute of DOMElement views.
-	     * @memberof Suit#view
-	     */
 		nameAttrib: m_viewNameAttrib,
 		name: 		m_viewName,
 		get: 		m_viewGet,
@@ -686,12 +657,6 @@ return {
 		traverse:   m_viewTraverse,
 	},
 
-	
-	/** 
-	* Reference to the container of Controller features.
-	* @class
-	* @memberof Suit
-	*/
 	controller: {
 		
 		list:     m_controllerList,
@@ -701,11 +666,6 @@ return {
 		clear:    m_controllerClear,
 	},
 
-	/** 
-	* Reference to the container of XmlHttpRequest features.
-	* @class
-	* @memberof Suit
-	*/
 	request: {
 		
 		create: m_requestCreate,
@@ -742,24 +702,7 @@ return {
 
 	},
 
-	/** 
-	* Assert Function
-	* @function
-	* @memberof Suit
-	* @param {Object} target - Target
-	* @param {Object} default - Default value
-	* @param {?String} type - Type of the target to be matched.
-	* @return {Object} - If 'target' is null or not of 'type' (when used) returns the 'default' value.
-	*/
 	assert: 		m_suitAssert,	
-
-	/** 
-	* Checks if a given string is null or empty.
-	* @function
-	* @memberof Suit
-	* @param {String} string - String value.	
-	* @return {Boolean} - Flag indicating if the string is null or empty.
-	*/
 	isNullOrEmpty:  m_suitIsNullOrEmpty,
 	
 };
