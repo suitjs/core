@@ -83,6 +83,15 @@ function m_modelDataTraverseCb(e,a) {
 	}				
 };
 
+/**
+ * Get/Set a View's data in object format.		 
+ * @function
+ * @name data
+ * @memberof Suit.model
+ * @param {String|Element} target - Path or reference to the target.
+ * @param {?Object} value - Value to set the target or null if the method must only return the value.
+ * @return {Object} - Returns the Object formatted data of the Element instance.
+ */
 var m_modelData = 
 function modelData(p_target,p_value) {
 
@@ -121,10 +130,10 @@ function modelValue(p_target,p_value) {
 				case "range":    return v == null ? n.valueAsNumber  : (n.valueAsNumber  = v); 	 					
 				default: 		 return v == null ? n.value  : (n.value = v); 	 
 
-			}							
-
+			}						
+        
 		}			
-		break;	
+			
 
 		case "select": {		
 			
@@ -146,14 +155,14 @@ function modelValue(p_target,p_value) {
 
 			return res;
 		}
-		break;
+		
 
-		case "textarea": return v==null ? n.value 			: (n.value=v); 	 	   break;
+		case "textarea": return v==null ? n.value 			: (n.value=v);
 
-		default: 		 return v==null ? n.textContent 	: (n.textContent=v);   break;
+		
 	}	
 
-	return "";
+	return v==null ? n.textContent 	: (n.textContent=v);
 
 };
 
@@ -259,9 +268,16 @@ function viewPath(p_target,p_root,p_separator) {
 	return res;
 };
 
+
 /**
-Returns a flag indicating if a given view contains another view.
-//*/
+ * Returns a flag indicating if a given view contains another view.
+ * @function
+ * @param  {String|Element} p_view
+ * @param  {String|Element} p_child         
+ * @returns {Boolean} - Flag indicating if 'view' is inside 'target'.
+ * @memberOf Suit.view
+ * @name contains
+ */
 var m_viewContains =
 function viewContains(p_view,p_child) {
 
@@ -273,9 +289,6 @@ function viewContains(p_view,p_child) {
 
 };
 
-/**
-Executes a querySelectorAll on the target and returns an Array with the results.
-//*/
 var m_viewQuery =
 function viewQuery(p_query,p_target) {
 
@@ -642,16 +655,8 @@ return {
 	* @class
 	* @memberof Suit	
 	*/
-	model: {
-
+	model: {	
 		
-		/**
-		 * Get/Set a View's data in object format.		 
-		 * @function
-		 * @param {String|DOMElement} target - Path or reference to the target.
-		 * @param {?Objet} value - Value to set the target or null if the method must only return the value.
-		 * @return {Object} - Returns the Object formatted data of the Element instance.
-		 */
 		data:  m_modelData,
 
 		/**
@@ -673,14 +678,20 @@ return {
 	view: {
 
 		/**
-	     * Default name attribute of DOMElement views.
-	     * @memberof Suit#view
+	     * Default name attribute of DOMElement views.	     
 	     */
 		nameAttrib: m_viewNameAttrib,
 		name: 		m_viewName,
 		get: 		m_viewGet,
 		path: 		m_viewPath,
 		contains:   m_viewContains,
+        /**
+         * Executes a querySelectorAll on the target and returns an Array with the results.
+         * @param  {String} query - Selector query.
+         * @param  {?String|?Element} target - Target view to apply the query. Defaults to <body>
+         * @return {Element[]} - List of zero or more results.
+         * @function
+         */        
 		query: 		m_viewQuery,
 		parent:     m_viewParent,
 		traverse:   m_viewTraverse,
@@ -769,3 +780,9 @@ return {
 
 	
 })(window,document,document.body);
+
+
+
+
+
+
