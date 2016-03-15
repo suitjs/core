@@ -9,15 +9,27 @@ var Suit =
 
 console.log("Suit> Init v1.0.0");
 
-/**
-Checks the validity of a value or if it matches the specified type then returns itself or a default value.
-//*/
+/** 
+* Checks the validity of a value or if it matches the specified type then returns itself or a default value.
+* @function
+* @memberof Suit
+* @name assert
+* @param {Object} p_value - Target
+* @param {Object} p_default - Default value
+* @param {?String} p_type - Type of the target to be matched.
+* @return {Object} - If 'target' is null or not of 'type' (when used) returns the 'default' value.
+*/
 var m_suitAssert = function suitAssert(p_value,p_default,p_type) { return p_type==null ? (p_value==null ? p_default : p_value) : ((typeof(p_value)==p_type) ? p_value : p_default); };
 
-/**
-Checks if a given string is either null or empty.
-//*/
-var m_suitIsNullOrEmpty = function suitIsNullOrEmpty(p_str) { if(p_str=="") return true; if(p_str==null) return true; return false; };
+/** 
+* Checks if a given string is either null or empty.
+* @function
+* @memberof Suit
+* @name isNullOrEmpty
+* @param {String} p_string - String value.	
+* @return {Boolean} - Flag indicating if the string is null or empty.
+*/
+var m_suitIsNullOrEmpty = function suitIsNullOrEmpty(p_string) { if(p_string=="") return true; if(p_string==null) return true; return false; };
 
 var owl = null;
 //Init SuitJS
@@ -106,8 +118,12 @@ function modelData(p_target,p_value) {
 };
 
 /**
-Get/Set the correct 'value' of a given element.
-//*/
+ * Get/Set the correct 'value' of a given Element.
+ * @function
+ * @param {String} target - Path or reference to the target.
+ * @param {?Objet} value  - Value to set the target or null if the method must only return the value.
+ * @return {String|Number|Object} - Returns the raw value of the Element.
+ */
 var m_modelValue =
 function modelValue(p_target,p_value) {
 
@@ -189,8 +205,11 @@ function m_viewGetTraverseCb(e,a) {
 };
 
 /**
-Variable that defines the naming style of the views.
-//*/
+ * Variable that defines the naming style of the views.
+ * @type {String}
+ * @memberof Suit
+ * @name nameAttrib	     
+ */
 var m_viewNameAttrib = "n";
 
 /**
@@ -658,14 +677,6 @@ return {
 	model: {	
 		
 		data:  m_modelData,
-
-		/**
-		 * Get/Set the correct 'value' of a given DOMElement.
-		 * @function
-		 * @param {String} target - Path or reference to the target.
-		 * @param {?Objet} value  - Value to set the target or null if the method must only return the value.
-		 * @return {String|Number|Object} - Returns the raw value of the Element.
-		 */
 		value: m_modelValue,		
 	},
 	
@@ -676,10 +687,7 @@ return {
 	* @memberof Suit	
 	*/
 	view: {
-
-		/**
-	     * Default name attribute of DOMElement views.	     
-	     */
+		
 		nameAttrib: m_viewNameAttrib,
 		name: 		m_viewName,
 		get: 		m_viewGet,
@@ -753,24 +761,7 @@ return {
 
 	},
 
-	/** 
-	* Assert Function
-	* @function
-	* @memberof Suit
-	* @param {Object} target - Target
-	* @param {Object} default - Default value
-	* @param {?String} type - Type of the target to be matched.
-	* @return {Object} - If 'target' is null or not of 'type' (when used) returns the 'default' value.
-	*/
-	assert: 		m_suitAssert,	
-
-	/** 
-	* Checks if a given string is null or empty.
-	* @function
-	* @memberof Suit
-	* @param {String} string - String value.	
-	* @return {Boolean} - Flag indicating if the string is null or empty.
-	*/
+	assert: 		m_suitAssert,
 	isNullOrEmpty:  m_suitIsNullOrEmpty,
 	
 };
@@ -780,9 +771,5 @@ return {
 
 	
 })(window,document,document.body);
-
-
-
-
 
 
