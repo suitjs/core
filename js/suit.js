@@ -1,8 +1,9 @@
 /**
  * Class that implements the Suit's core framework features.
  * @class
+ * @type Suit
  */
-var Suit =
+var Suit;
 (function(window,document,body) {
 
 "use strict"; 	
@@ -11,34 +12,28 @@ console.log("Suit> Init v1.0.0");
 
 /** 
 * Checks the validity of a value or if it matches the specified type then returns itself or a default value.
-* @function
-* @memberof Suit
-* @name assert
 * @param {Object} p_value - Target
 * @param {Object} p_default - Default value
 * @param {?String} p_type - Type of the target to be matched.
 * @return {Object} - If 'target' is null or not of 'type' (when used) returns the 'default' value.
 */
-var m_suitAssert = function suitAssert(p_value,p_default,p_type) { return p_type==null ? (p_value==null ? p_default : p_value) : ((typeof(p_value)==p_type) ? p_value : p_default); };
+Suit.assert =
+function suitAssert(p_value,p_default,p_type) { return p_type==null ? (p_value==null ? p_default : p_value) : ((typeof(p_value)==p_type) ? p_value : p_default); };
 
 /** 
 * Checks if a given string is either null or empty.
-* @function
-* @memberof Suit
-* @name isNullOrEmpty
 * @param {String} p_string - String value.	
 * @return {Boolean} - Flag indicating if the string is null or empty.
 */
-var m_suitIsNullOrEmpty = function suitIsNullOrEmpty(p_string) { if(p_string=="") return true; if(p_string==null) return true; return false; };
+Suit.isNullOrEmpty =
+function suitIsNullOrEmpty(p_string) { if(p_string=="") return true; if(p_string==null) return true; return false; };
 
 var owl = null;
 //Init SuitJS
 window.addEventListener("load",
-owl = function onSuitWindowLoad(e)
-{		
-	setTimeout(function delayedComponentEvent() { window.dispatchEvent(new Event("component")); Suit.controller.dispatch("load"); }, 1);
+owl = function onSuitWindowLoad(e) {		
+	setTimeout(function delayedComponentEvent() { window.dispatchEvent(new Event("component")); Suit.controller.dispatch("welcome"); }, 1);
 	window.removeEventListener("load",owl);
-
 });
 
 /*
@@ -95,16 +90,19 @@ function m_modelDataTraverseCb(e,a) {
 	}				
 };
 
+/** 
+* Reference to the container of Model features.
+* @class
+*/
+Suit.model = {};
+
 /**
- * Get/Set a View's data in object format.		 
- * @function
- * @name data
- * @memberof Suit.model
+ * Get/Set a View's data in object format.
  * @param {String|Element} target - Path or reference to the target.
  * @param {?Object} value - Value to set the target or null if the method must only return the value.
  * @return {Object} - Returns the Object formatted data of the Element instance.
  */
-var m_modelData = 
+Suit.model.data = 
 function modelData(p_target,p_value) {
 
 	var t = Suit.view.get(p_target);
@@ -119,12 +117,11 @@ function modelData(p_target,p_value) {
 
 /**
  * Get/Set the correct 'value' of a given Element.
- * @function
  * @param {String} target - Path or reference to the target.
  * @param {?Objet} value  - Value to set the target or null if the method must only return the value.
  * @return {String|Number|Object} - Returns the raw value of the Element.
  */
-var m_modelValue =
+Suit.model.value = 
 function modelValue(p_target,p_value) {
 
 	var n  = Suit.view.get(p_target);
@@ -204,18 +201,25 @@ function m_viewGetTraverseCb(e,a) {
 	return true;			
 };
 
-/**
- * Variable that defines the naming style of the views.
- * @type {String}
- * @memberof Suit
- * @name nameAttrib	     
- */
-var m_viewNameAttrib = "n";
+/** 	
+* Reference to the container of View features.
+* @class	
+*/
+Suit.view = {};
 
 /**
-Get/Set the name attribute of a HTML View.
-//*/
-var m_viewName =
+ * Variable that defines the naming style of the views. Defaults to 'n'.
+ * @type {String}	     
+ */
+Suit.view.nameAttrib = "n";
+
+/**
+ * Get/Set the name attribute of a HTML View.
+ * @param  {String|Element} p_target - View element to be renamed.
+ * @param  {String} p_value - Name of the view element.
+ * @returns {String} - The view element's name.
+ */
+Suit.view.name =
 function viewName(p_target,p_value) {
 
 	var na = this.nameAttrib;
@@ -233,9 +237,13 @@ function viewName(p_target,p_value) {
 };
 
 /**
-Searches for the target by its path's string or returns itself if DOM element.
-//*/
-var m_viewGet =
+ * Searches for the target by its path's string or returns itself if DOM element.
+ * @function
+ * @param  {String|Element} p_target - Path to the element or the element itself.
+ * @param  {?(String|Element)} p_root - Start point of the path search. Defaults to [body].
+ * @returns {Object} - The view element located at 'target' path or 'target' itself. 
+ */
+Suit.view.get
 function viewGet(p_target,p_root) {
 
 	if(typeof(p_target)!="string") return p_target;
@@ -261,9 +269,13 @@ function viewGet(p_target,p_root) {
 };
 
 /**
-Returns the 'separator' separated path of target relative to 'root' parameter. In case of mismatched arguments it returns an empty string.
-//*/
-var m_viewPath =
+ * Returns the 'separator' separated path of target relative to 'root' parameter. In case of mismatched arguments it returns an empty string. The default separator is '.'
+ * @param  {String|Element} p_target - Target view to generate the path.
+ * @param  {?(String|Element)} p_root - Start point to search for 'target'. Defaults to [body].
+ * @param  {?String} p_separator - String separator for the resulting path.
+ * @returns {String} - The path for 'target' separated by the chosen 'separator'.
+ */
+Suit.view.path =
 function viewPath(p_target,p_root,p_separator) {
 
 	var t 	= Suit.view.get(p_target);
@@ -287,17 +299,14 @@ function viewPath(p_target,p_root,p_separator) {
 	return res;
 };
 
-
 /**
  * Returns a flag indicating if a given view contains another view.
  * @function
  * @param  {String|Element} p_view
  * @param  {String|Element} p_child         
- * @returns {Boolean} - Flag indicating if 'view' is inside 'target'.
- * @memberOf Suit.view
- * @name contains
+ * @returns {Boolean} - Flag indicating if 'view' is inside 'target'. 
  */
-var m_viewContains =
+Suit.view.contains = 
 function viewContains(p_view,p_child) {
 
 	var v = Suit.view.get(p_view);
@@ -308,7 +317,13 @@ function viewContains(p_view,p_child) {
 
 };
 
-var m_viewQuery =
+/**
+ * Executes a querySelectorAll on the target and returns an Array with the results.
+ * @param  {String} p_query - Selector query.
+ * @param  {?(String|Element)} p_target - Target view to apply the query. Defaults to [body]
+ * @returns {Element[]} - List of zero or more results.
+ */
+Suit.view.query =
 function viewQuery(p_query,p_target) {
 
 	var t = Suit.view.get(p_target);
@@ -320,10 +335,13 @@ function viewQuery(p_query,p_target) {
 
 };
 
+
 /**
-Returns the first parent element which is a Suit's View element.
-//*/
-var m_viewParent =
+ * Returns the first parent element which is a Suit's View element (i.e. have a name attrib).
+ * @param  {String|Element} p_target - Target to have its parent checked.
+ * @returns {Element} - The reference to the parent element of 'target'.
+ */
+Suit.view.parent =
 function viewParent(p_target) {
 
 	var t = Suit.view.get(p_target);
@@ -339,12 +357,24 @@ function viewParent(p_target) {
 };
 
 /**
-Navigates the DOM hierarchy of the target element and invokes the callback for each element.
-If the callback returns false the search stops.
-The default mode is DepthFirstSearch (DFS), if the last parameter is 'true' the mode will be BreadthFirstSearch (BFS)
-It is possible to pass arguments for the specified callback too.
-//*/
-var m_viewTraverse =
+ * Callback called when the view module is traversing its target.
+ * @callback ViewTraverseCallback
+ * @param {Element} p_target - Current element being visited.
+ * @param {?Object} p_args - Extra data passed in the original 'traverse' call.
+ * @returns {?Boolean} - Returning 'false' will stop the traversal for the current node. 
+ */
+
+/**
+ * Navigates the DOM hierarchy of the target element and invokes the callback for each element.
+ * If the callback returns false the search stops.
+ * The default mode is DepthFirstSearch (DFS), if the last parameter is 'true' the mode will be BreadthFirstSearch (BFS)
+ * It is possible to pass arguments for the specified callback too.
+ * @param  {String|Element} p_target - Path or Reference to the element.
+ * @param  {ViewTraverseCallback} p_callback - Callback to handle each element visit.
+ * @param  {?Boolean} p_bfs - Flag that indicates if Breadth First Search will be used.
+ * @param  {?Object} p_args - Extra data passed in each callback call.
+ */
+Suit.view.traverse =
 function viewTraverse(p_target, p_callback, p_bfs,p_args) {
 
 	var t 		= Suit.view.get(p_target);
@@ -385,15 +415,25 @@ function viewTraverse(p_target, p_callback, p_bfs,p_args) {
 Class that implements Controller functionalities.
 */
 
-/**
-List of controllers in the pool.
-//*/
-var m_controllerList = [];
+/** 
+* Reference to the container of Controller features.
+* @class
+*/
+Suit.controller = {};
 
 /**
-Attaches a controller to the pool.
-//*/
-var m_controllerAdd =
+ * List of registered controllers.
+ * @type {Object[]}
+ */
+Suit.controller.list = [];
+
+/**
+ * Attaches a controller to the pool.
+ * @param  {Object} p_target - Reference to the controller instance.
+ * @param  {?(String|Element)} p_view - Path or Reference to the view element to be watched.
+ * @returns {Object} - Reference to the added controller.
+ */
+Suit.controller.add =
 function controllerAdd(p_target,p_view) {
 
 	var t = p_target;
@@ -444,8 +484,10 @@ function controllerAdd(p_target,p_view) {
 };
 
 /**
-Removes the controller from the pool.
-//*/
+ * Removes the controller from the pool.
+ * @param  {Object} p_target - Reference to the controller instance.
+ * @returns {Object} - Reference to the removed controller.
+ */
 var m_controllerRemove=
 function controllerRemove(p_target) {
 
@@ -472,10 +514,12 @@ function controllerRemove(p_target) {
 };
 
 /**
-Dispatches a notification for all enabled controllers in the pool.
-The format of the 'path' can be either 'path.to.event' or 'path.to.event@type'
-//*/
-var m_controllerDispatch =
+ * Dispatches a notification for all enabled controllers in the pool.
+ * The format of the 'path' can be either 'path.to.event' or 'path.to.event@type'
+ * @param  {String} p_path - String with a path that describes the event context.
+ * @param  {?Object} p_data - Extra data to be passed to the event.
+ */
+Suit.controller.dispatch =
 function controllerDispatch(p_path,p_data) {
 
 	var cev   = {};
@@ -493,11 +537,10 @@ function controllerDispatch(p_path,p_data) {
 };
 
 /**
-Removes all controllers from the pool.
-//*/
-var m_controllerClear =
-function controllerClear()
-{
+ * Removes all controllers from the pool.
+ */
+Suit.controller.clear =
+function controllerClear() {
 	var l = Suit.controller.list;
 	for(var i=0;i<l.length;i++) Suit.controller.remove(l[i]);
 };
@@ -508,6 +551,12 @@ function controllerClear()
 ====================================================
 Class that implements requests utility functions.
 */
+
+/** 
+* Reference to the container of XmlHttpRequest features.
+* @class
+*/
+Suit.request = {};
 
 /**
 Receives a ProgressEvent and returns the normalized progress scaled by a factor.
@@ -548,11 +597,25 @@ function requestCallbackInvoke(p_callback,p_is_string,p_data,p_progress,p_event)
 	p_callback(p_data,p_progress,p_event);
 };
 
+/**
+ * Callback called when a created request updates its progress.
+ * @callback RequestCallback
+ * @param {Object} p_data - Data being loaded or null (in case of error or progress).
+ * @param {Number} p_progress - Download or Upload progress ('upload' values have the range [-1.0,0.0) )
+ * @param {?Event} p_event - Reference to the XmlHttpRequest event that generated the call.  
+ */
 
 /**
-Create and execute a XmlHttpRequest and invokes the callback with the needed feedback of the process.
-//*/
-var m_requestCreate =
+ * Create and execute a XmlHttpRequest and invokes the callback with the needed feedback of the process.
+ * @param  {String} p_method - Request method (GET, POST,...)
+ * @param  {String} p_url - URL
+ * @param  {RequestCallback} p_callback - Reference to the callback function to handle this request.
+ * @param  {String} p_response - Type of the response. 
+ * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
+ * @param  {?Object} p_headers - Object containing custom headers.
+ * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ */
+Suit.request.create =
 function requestCreate(p_method,p_url,p_callback,p_response, p_data,p_headers) {
 
 	var method   = Suit.assert(p_method,"get");
@@ -637,137 +700,132 @@ function requestCreate(p_method,p_url,p_callback,p_response, p_data,p_headers) {
 };
 
 /**
-Creates a GET request expecting 'text' response.
-//*/
-var m_requestGet = function requestGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"text",p_data,p_headers);	};
+ * Creates a GET request expecting 'text' response.
+ * @param  {String} p_url - URL
+ * @param  {RequestCallback} p_callback - Reference to the callback function to handle this request.
+ * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
+ * @param  {?Object} p_headers - Object containing custom headers.
+ * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ */
+Suit.request.get = function requestGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"text",p_data,p_headers);	};
 
 /**
-Creates a POST request expecting 'text' response.
-//*/
-var m_requestPost = function requestPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"text",p_data,p_headers);	};
+ * Creates a POST request expecting 'text' response.
+ * @param  {String} p_url - URL
+ * @param  {RequestCallback} p_callback - Reference to the callback function to handle this request.
+ * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
+ * @param  {?Object} p_headers - Object containing custom headers.
+ * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ */
+Suit.request.post = function requestPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"text",p_data,p_headers);	};
 
 /**
 ================ Shortcuts to handle requests with different responses. ================
 //*/
 
-//Binary
-var m_requestBinaryGet  =   function requestBinaryGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"arraybuffer",p_data,p_headers);	};
-var m_requestBinaryPost =   function requestBinaryPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"arraybuffer",p_data,p_headers);	};
+/**
+ * Reference to the shortcuts for creating requests that expects ArrayBuffer as result.
+ * @class
+ */
+Suit.request.binary = {};
 
-//Blob
-var m_requestBlobGet  =  function requestBlobGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"blob",p_data,p_headers);	};
-var m_requestBlobPost =  function requestBlobPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"blob",p_data,p_headers);	};
+/**
+ * Creates a GET request expecting 'arraybuffer' response.
+ * @param  {String} p_url - URL
+ * @param  {RequestCallback} p_callback - Reference to the callback function to handle this request.
+ * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
+ * @param  {?Object} p_headers - Object containing custom headers.
+ * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ */
+Suit.request.binary.get  =   function requestBinaryGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"arraybuffer",p_data,p_headers);	};
 
-//Document
-var m_requestDocumentGet  =  function requestDocumentGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"document",p_data,p_headers);	};
-var m_requestDocumentPost =  function requestDocumentPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"document",p_data,p_headers);	};
+/**
+ * Creates a POST request expecting 'arraybuffer' response.
+ * @param  {String} p_url - URL
+ * @param  {RequestCallback} p_callback - Reference to the callback function to handle this request.
+ * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
+ * @param  {?Object} p_headers - Object containing custom headers.
+ * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ */
+Suit.request.binary.post =   function requestBinaryPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"arraybuffer",p_data,p_headers);	};
 
-//Json
-var m_requestJsonGet  =  function requestJsonGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"json",p_data,p_headers);	};
-var m_requestJsonPost =  function requestJsonPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"json",p_data,p_headers);	};
+/**
+ * Reference to the shortcuts for creating requests that expects Blob as result.
+ * @class
+ */
+Suit.request.blob = {};
 
+/**
+ * Creates a GET request expecting 'blob' response.
+ * @param  {String} p_url - URL
+ * @param  {RequestCallback} p_callback - Reference to the callback function to handle this request.
+ * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
+ * @param  {?Object} p_headers - Object containing custom headers.
+ * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ */
+Suit.request.blob.get  =  function requestBlobGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"blob",p_data,p_headers);	};
 
-return {
-	
-	/** 
-	* Reference to the container of Model features.
-	* @class
-	* @memberof Suit	
-	*/
-	model: {	
-		
-		data:  m_modelData,
-		value: m_modelValue,		
-	},
-	
-	
-	/** 	
-	* Reference to the container of View features.
-	* @class
-	* @memberof Suit	
-	*/
-	view: {
-		
-		nameAttrib: m_viewNameAttrib,
-		name: 		m_viewName,
-		get: 		m_viewGet,
-		path: 		m_viewPath,
-		contains:   m_viewContains,
-        /**
-         * Executes a querySelectorAll on the target and returns an Array with the results.
-         * @param  {String} query - Selector query.
-         * @param  {?String|?Element} target - Target view to apply the query. Defaults to <body>
-         * @return {Element[]} - List of zero or more results.
-         * @function
-         */        
-		query: 		m_viewQuery,
-		parent:     m_viewParent,
-		traverse:   m_viewTraverse,
-	},
+/**
+ * Creates a POST request expecting 'blob' response.
+ * @param  {String} p_url - URL
+ * @param  {RequestCallback} p_callback - Reference to the callback function to handle this request.
+ * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
+ * @param  {?Object} p_headers - Object containing custom headers.
+ * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ */
+Suit.request.blob.post =  function requestBlobPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"blob",p_data,p_headers);	};
 
-	
-	/** 
-	* Reference to the container of Controller features.
-	* @class
-	* @memberof Suit
-	*/
-	controller: {
-		
-		list:     m_controllerList,
-		add:      m_controllerAdd,
-		remove:   m_controllerRemove,
-		dispatch: m_controllerDispatch,
-		clear:    m_controllerClear,
-	},
+/**
+ * Reference to the shortcuts for creating requests that expects Document as result.
+ * @class
+ */
+Suit.request.document = {};
 
-	/** 
-	* Reference to the container of XmlHttpRequest features.
-	* @class
-	* @memberof Suit
-	*/
-	request: {
-		
-		create: m_requestCreate,
-		get: 	m_requestGet,
-		post: 	m_requestPost,		
-		
-		binary: {			
+/**
+ * Creates a GET request expecting 'document' response.
+ * @param  {String} p_url - URL
+ * @param  {RequestCallback} p_callback - Reference to the callback function to handle this request.
+ * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
+ * @param  {?Object} p_headers - Object containing custom headers.
+ * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ */
+Suit.request.document.get  =  function requestDocumentGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"document",p_data,p_headers);	};
 
-			get:  m_requestBinaryGet,
-			post: m_requestBinaryPost,
+/**
+ * Creates a POST request expecting 'document' response.
+ * @param  {String} p_url - URL
+ * @param  {RequestCallback} p_callback - Reference to the callback function to handle this request.
+ * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
+ * @param  {?Object} p_headers - Object containing custom headers.
+ * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ */
+Suit.request.document.post =  function requestDocumentPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"document",p_data,p_headers);	};
 
-		},
+/**
+ * Reference to the shortcuts for creating requests that expects Json as result.
+ * @class
+ */
+Suit.request.json = {};
 
-		blob: {			
+/**
+ * Creates a GET request expecting 'json' response.
+ * @param  {String} p_url - URL
+ * @param  {RequestCallback} p_callback - Reference to the callback function to handle this request.
+ * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
+ * @param  {?Object} p_headers - Object containing custom headers.
+ * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ */
+Suit.request.json.get  =  function requestJsonGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"json",p_data,p_headers);	};
 
-			get:  m_requestBlobGet,
-			post: m_requestBlobPost,
-
-		},		
-
-		document: {			
-
-			get:  m_requestDocumentGet,
-			post: m_requestDocumentPost,
-
-		},
-
-		json: {			
-
-			get:  m_requestJsonGet,
-			post: m_requestJsonPost,
-
-		},
-
-	},
-
-	assert: 		m_suitAssert,
-	isNullOrEmpty:  m_suitIsNullOrEmpty,
-	
-};
-
-
-
+/**
+ * Creates a POST request expecting 'json' response.
+ * @param  {String} p_url - URL
+ * @param  {RequestCallback} p_callback - Reference to the callback function to handle this request.
+ * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
+ * @param  {?Object} p_headers - Object containing custom headers.
+ * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ */
+Suit.request.json.post =  function requestJsonPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"json",p_data,p_headers);	};
 
 	
 })(window,document,document.body);

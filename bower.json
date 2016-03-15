@@ -1,9 +1,9 @@
 {
-  "name": "suitjs/suit",
-  "homepage": "https://github.com/suitjs/suit",
+  "name": "suitjs",
+  "homepage": "https://github.com/suitjs/core",
   "authors": [
     "Eduardo Dias da Costa <eduardo@thelaborat.org>",
-	"Gustavo Allebrandt <gustavoallebrandt@gmail.com>",
+	"Gustavo Allebrandt <gustavoallebrandt@gmail.com>"
   ],
   "description": "A comfortable MVC framework.",
   "main": ["js/suit.js"],
@@ -22,7 +22,7 @@
   
   "ignore": [	
 	"**/.*",
-	"old/",
+	"old/",    
 	"node_modules/",
 	"bower_components/",			
 	"*.hxproj",

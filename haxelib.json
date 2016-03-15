@@ -1,6 +1,6 @@
 {
   "name": "suithx",
-  "url": "https://github.com/suitjs/suit",
+  "url": "https://github.com/suitjs/core",
   "license": "MIT",
   "tags": ["mvc","model","view","controller","mutation","bind","request","post","get","js"],
   "description": "A comfortable MVC framework.",
