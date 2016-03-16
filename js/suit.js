@@ -1,7 +1,4 @@
 /**
- * @filename suit.js
- */
-/**
  * Class that implements the Suit's core framework features.
  * @class
  * @type Suit
