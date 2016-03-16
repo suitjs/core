@@ -50,7 +50,7 @@ $(function () {
         var t = n.textContent;
         var tks = t.split("/");
         t = tks[tks.length-2]+"/"+tks[tks.length-1];
-        tsl[i].children[0].textContent = t;
+        //tsl[i].children[0].textContent = t;
     }
 
     // Auto resizing on navigation

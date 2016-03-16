@@ -27,23 +27,23 @@ li {
   float: left;
   width: 250px;
   height: 100%;
-  background-color: #1a1a1a;
+  background-color: #7e0d14;
 }
 .navigation .applicationName {
   margin: 0;
-  margin-top: 15px;
+  margin-top: 0px;
   padding: 10px 15px;
-  font: bold 1.25em Helvetica;
+  font: bold 1.8em "jaf-bernino-sans";
   color: #fff;
 }
 .navigation .applicationName a {
   color: #fff;
 }
 .navigation .search {
-  padding: 10px 15px;
+  padding: 10px 15px;  
 }
 .navigation .search input {
-  background-color: #333;
+  background-color: #300;
   color: #fff;
   border-color: #555;
 }
@@ -88,7 +88,7 @@ li {
 .navigation li.item .subtitle {
   margin-top: 10px;
   font: bold 0.65em Helvetica;
-  color: #c1272d;
+  color: #f33;
   display: block;
 }
 .navigation li.item ul > li {
@@ -146,13 +146,13 @@ li {
 .main h4.name span.glyphicon {
   display: inline-block;
   vertical-align: middle;
-  color: #e1e1e1;
+  color: #f33;
   margin-left: 7px;
 }
 .main h4.name span.returnType {
   margin-left: 3px;
   background-color: transparent!important;
-  color: gray!important;
+  color: #f33 !important;
 }
 .main span.static {
   display: inline-block;
@@ -164,19 +164,19 @@ li {
   margin-right: 8px;
 }
 .main span.number {
-  background-color: gray!important;
+  background-color: #f00!important;
 }
 .main span.string {
-  background-color: gray!important;
+  background-color: #f00!important;
 }
 .main span.object {
-  background-color: #2a6496 !important;
+  background-color: #f00 !important;
 }
 .main span.array {
-  background-color: #2a6496 !important;
+  background-color: #f00 !important;
 }
 .main span.boolean {
-  background-color: #ee7d7d !important;
+  background-color: #f00 !important;
 }
 .main .subsection-title {
   font-size: 14px;
@@ -290,7 +290,7 @@ li {
 }
 .main table .type {
   width: 60px;
-  color: #aaa;
+  color: #f00;
   font-size: 11px;
 }
 .main table .attributes {

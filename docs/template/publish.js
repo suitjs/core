@@ -99,7 +99,7 @@ function shortenPaths(files, commonPrefix) {
     return files;
 }
 
-function resolveSourcePath(filepath) {
+function resolveSourcePath(filepath) {    
     return path.resolve(process.cwd(), filepath);
 }
 
@@ -320,11 +320,16 @@ exports.publish = function(taffyData, opts, tutorials) {
         var sourcePath;
         var resolvedSourcePath;
         if (doclet.meta) {
-            sourcePath = getPathFromDoclet(doclet);
+            sourcePath = getPathFromDoclet(doclet);            
             resolvedSourcePath = resolveSourcePath(sourcePath);
+            resolvedSourcePath = sourcePath;
+            
+            var shortPath = sourcePath.replace(process.cwd()+"\\","");
+            
             sourceFiles[sourcePath] = {
                 resolved: resolvedSourcePath,
-                shortened: null
+                shortened: null,
+                small: shortPath
             };
             sourceFilePaths.push(resolvedSourcePath);
         }
@@ -380,9 +385,12 @@ exports.publish = function(taffyData, opts, tutorials) {
         var docletPath;
         if (doclet.meta) {
             docletPath = getPathFromDoclet(doclet);
+            var shortPath = sourceFiles[docletPath].small;
             docletPath = sourceFiles[docletPath].shortened;
+             
             if (docletPath) {
                 doclet.meta.filename = docletPath;
+                doclet.meta.shortPath = shortPath;               
             }
         }
     });

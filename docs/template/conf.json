@@ -2,33 +2,43 @@
 	"tags": {
 		"allowUnknownTags" : true
 	},
+    
 	"plugins": ["plugins/markdown"],
 	"templates": {
-		"cleverLinks": true,
-		"monospaceLinks": true,
+        "applicationName": "SuitJS - Core",
+        "navigationImage": "http://www.suitjs.com/public/images/logo-64.png",
+		"cleverLinks":      true,
+		"monospaceLinks":   true,
+        "linenums":         true,
+		"disqus":           "suitjs",
+		"googleAnalytics":  "UA-75143185-1",        
+        
 		"default": {
 			"outputSourceFiles" : true
 		},
-		"applicationName": "SuitJS - Core",
-		"disqus": "",
-		"googleAnalytics": "",
+        
 		"openGraph": {
-			"title": "",
-			"type": "website",
-			"image": "",
-			"site_name": "",
-			"url": ""
+			"title":        "SuitJS - Core",
+			"type":         "website",
+			"image":        "http://www.suitjs.com/public/images/logo-suitjs.svg?v=2",
+			"site_name":    "SuitJS - Core",
+			"url":          "http://suitjs.com/docs/core/"
 		},
+        
 		"meta": {
-			"title": "SuitJS - Core",
-			"description": "",
-			"keyword": ""
+			"title":        "SuitJS - Core",
+			"description":  "Core classes for the SuitJS framework.",
+			"keyword":      "javascript,framework,mvc,suitjs,haxe,typescript"
 		},
-		"linenums": false
+        
+        "link":{
+            "favicon": "http://suitjs.com/favicon.png"
+        }
+        
 	},
 	"markdown": {
-		"parser": "gfm",
+		"parser":   "gfm",
 		"hardwrap": true,
-		"tags": ["examples"]
+		"tags":     ["examples"]
 	}
 }
