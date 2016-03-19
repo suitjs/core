@@ -7,7 +7,7 @@
   ],
   "description": "A comfortable MVC framework.",
   "main": ["js/suit.js"],
-  "moduleType": [],
+  "moduleType": "globals",
   "keywords": [
     "model",
     "view",
