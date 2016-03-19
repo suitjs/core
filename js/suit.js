@@ -488,7 +488,7 @@ function controllerAdd(p_target,p_view) {
  * @param  {Object} p_target - Reference to the controller instance.
  * @returns {Object} - Reference to the removed controller.
  */
-var m_controllerRemove=
+Suit.controller.remove =
 function controllerRemove(p_target) {
 
 	var t = p_target;
