@@ -3,7 +3,7 @@
  * @class
  * @type Suit
  */
-var Suit;
+var Suit = {};
 (function(window,document,body) {
 
 "use strict"; 	
