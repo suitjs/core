@@ -243,7 +243,7 @@ function viewName(p_target,p_value) {
  * @param  {?(String|Element)} p_root - Start point of the path search. Defaults to [body].
  * @returns {Object} - The view element located at 'target' path or 'target' itself. 
  */
-Suit.view.get
+Suit.view.get =
 function viewGet(p_target,p_root) {
 
 	if(typeof(p_target)!="string") return p_target;
