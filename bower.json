@@ -1,5 +1,6 @@
 {
   "name": "suitjs",
+  "version": "1.0.1",
   "homepage": "https://github.com/suitjs/core",
   "authors": [
     "Eduardo Dias da Costa <eduardo@thelaborat.org>",
