@@ -4,7 +4,7 @@ body {
     background-color: #fff;
     font-family: 'Segoe WPC', 'Segoe UI', SFUIText-Light, HelveticaNeue-Light, sans-serif;
     font-size: 0.8rem;
-    line-height: 1.1;
+    line-height: 1.5;
 }
 a {
     color: #007acc;
@@ -155,9 +155,9 @@ table > tbody > tr + tr > td {
 code {
     color: #000;
     font-family: Menlo, Monaco, Consolas, 'Droid Sans Mono', 'Courier New', monospace;
-    background: rgba(127, 127, 127, 0.1);
-    padding: 0 0.25rem;
-    border-radius: 0.25rem;
+    background: #ccc;
+    padding: 0.1rem 0.25rem;    
+    border-radius: 0.2rem;
 }
 pre {
     white-space: pre;
