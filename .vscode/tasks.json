@@ -12,7 +12,7 @@
 	// The command is tsc. Assumes that tsc has been installed using npm install -g typescript
 	"command": "cmd",
     
-    "isShellCommand": true,
+    "isShellCommand": false,
     
     "args": ["/C ${workspaceRoot}/tools/build.bat"],
 

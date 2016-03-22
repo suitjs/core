@@ -6,7 +6,7 @@
 	"plugins": ["plugins/markdown"],
 	"templates": {
         "applicationName": "SuitJS - Core",
-        "navigationImage": "http://www.suitjs.com/public/images/logo-64.png",
+        "navigationImage": "http://www.suitjs.com/img/logo-64.png",
 		"cleverLinks":      true,
 		"monospaceLinks":   true,
         "linenums":         true,
@@ -20,7 +20,7 @@
 		"openGraph": {
 			"title":        "SuitJS - Core",
 			"type":         "website",
-			"image":        "http://www.suitjs.com/public/images/logo-suitjs.svg?v=2",
+			"image":        "http://www.suitjs.com/img/logo-suitjs.svg?v=2",
 			"site_name":    "SuitJS - Core",
 			"url":          "http://suitjs.com/docs/core/"
 		},

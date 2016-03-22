@@ -1,0 +1,22 @@
+{
+  "name": "suitjs",
+  "version": "1.0.0",
+  "description": "SuitJS core features.", 
+  
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suitjs/core"
+  },
+  "author": "Eduardo Dias da Costa  <eduardo@thelaborat.org> https://github.com/eduardo-costa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/suitjs/suitjs.github.io/issues"
+  },
+  "homepage": "http://www.suitjs.com",
+  "dependencies": {
+    
+  },
+  "contributors": [
+    "Gustavo Allebrandt <gustavoallebrandt@gmail.com"
+  ]
+}

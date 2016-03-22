@@ -13,7 +13,7 @@
     
     <meta property="og:title" content="SuitJS - Core"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:image" content="http://www.suitjs.com/public/images/logo-suitjs.svg?v=2"/>
+    <meta property="og:image" content="http://www.suitjs.com/img/logo-suitjs.svg?v=2"/>
     <meta property="og:site_name" content="SuitJS - Core"/>
     <meta property="og:url" content="http://suitjs.com/docs/core/"/>
     
@@ -30,7 +30,7 @@
     
     
     <script>
-    var config = {"monospaceLinks":true,"cleverLinks":true,"applicationName":"SuitJS - Core","navigationImage":"http://www.suitjs.com/public/images/logo-64.png","linenums":true,"disqus":"suitjs","googleAnalytics":"UA-75143185-1","default":{"outputSourceFiles":true},"openGraph":{"title":"SuitJS - Core","type":"website","image":"http://www.suitjs.com/public/images/logo-suitjs.svg?v=2","site_name":"SuitJS - Core","url":"http://suitjs.com/docs/core/"},"meta":{"title":"SuitJS - Core","description":"Core classes for the SuitJS framework.","keyword":"javascript,framework,mvc,suitjs,haxe,typescript"},"link":{"favicon":"http://suitjs.com/favicon.png"}};
+    var config = {"monospaceLinks":true,"cleverLinks":true,"applicationName":"SuitJS - Core","navigationImage":"http://www.suitjs.com/img/logo-64.png","linenums":true,"disqus":"suitjs","googleAnalytics":"UA-75143185-1","default":{"outputSourceFiles":true},"openGraph":{"title":"SuitJS - Core","type":"website","image":"http://www.suitjs.com/img/logo-suitjs.svg?v=2","site_name":"SuitJS - Core","url":"http://suitjs.com/docs/core/"},"meta":{"title":"SuitJS - Core","description":"Core classes for the SuitJS framework.","keyword":"javascript,framework,mvc,suitjs,haxe,typescript"},"link":{"favicon":"http://suitjs.com/favicon.png"}};
     </script>
     
 
@@ -54,7 +54,7 @@
 <div class="navigation">
 
     <div style="text-align: center; margin-top: 5px;">
-        <img src="http://www.suitjs.com/public/images/logo-64.png" alt="SuitJS - Core" style="display: inline">
+        <img src="http://www.suitjs.com/img/logo-64.png" alt="SuitJS - Core" style="display: inline">
     </div>
 
     <h3 class="applicationName"><a href="index.html">SuitJS - Core</a></h3>
@@ -316,7 +316,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="g__development_project_web_thelab_suitjs_core_js_suit.js.html">Source: g:/development/project/web/thelab/suitjs/core/js/suit.js</h1>
+        <h1 class="page-title" data-filename="c__dev_projects_suitjs_core_js_suit.js.html">Source: c:/dev/projects/suitjs/core/js/suit.js</h1>
         
 
 
@@ -335,21 +335,35 @@ var Suit = {};
 
 console.log("Suit> Init v1.0.0");
 
-/** 
-* Checks the validity of a value or if it matches the specified type then returns itself or a default value.
-* @param {Object} p_value - Target
-* @param {Object} p_default - Default value
-* @param {?String} p_type - Type of the target to be matched.
-* @return {Object} - If 'target' is null or not of 'type' (when used) returns the 'default' value.
-*/
+/**
+ * Checks the validity of a value or if it matches the specified type then returns itself or a default value.
+ * @param {Object} p_value - Target
+ * @param {Object} p_default - Default value
+ * @param {?String} p_type - Type of the target to be matched.
+ * @return {Object} - If 'target' is null or not of 'type' (when used) returns the 'default' value.
+ * @example 
+ * var s = null;
+ * Suit.assert(s,"default");          //returns 'default'
+ * s = "ok";
+ * Suit.assert(s,"default");          //returns 'ok'
+ * Suit.assert(s,"default","Number"); //returns 'default'
+ * Suit.assert(s,"default","String"); //returns 'ok'
+ */
 Suit.assert =
 function suitAssert(p_value,p_default,p_type) { return p_type==null ? (p_value==null ? p_default : p_value) : ((typeof(p_value)==p_type) ? p_value : p_default); };
 
 /** 
-* Checks if a given string is either null or empty.
-* @param {String} p_string - String value.	
-* @return {Boolean} - Flag indicating if the string is null or empty.
-*/
+ * Checks if a given string is either null or empty.
+ * @param {String} p_string - String value.	
+ * @return {Boolean} - Flag indicating if the string is null or empty.
+ * @example
+ * var s = "";
+ * Suit.isNullOrEmpty(s); //returns true
+ * s = null;
+ * Suit.isNullOrEmpty(s); //returns true
+ * s = "ok";
+ * Suit.isNullOrEmpty(s); //returns false
+ */
 Suit.isNullOrEmpty =
 function suitIsNullOrEmpty(p_string) { if(p_string=="") return true; if(p_string==null) return true; return false; };
 
@@ -426,6 +440,28 @@ Suit.model = {};
  * @param {String|Element} target - Path or reference to the target.
  * @param {?Object} value - Value to set the target or null if the method must only return the value.
  * @return {Object} - Returns the Object formatted data of the Element instance.
+ * @example
+ * ```html
+ * &lt;div n='content'>
+ *  &lt;p n='title>Title&lt;/p>
+ *  &lt;input type='text' n='name' value='John'>  
+ * &lt;/div>
+ * ```
+ * //Get
+ * Suit.model.data("content");       //returns {title: "Title", name: "John"}
+ * Suit.model.data("content.title"); //returns "Title"
+ * Suit.model.data("content.name");  //returns "John"
+ * 
+ * //Set
+ * Suit.model.data("content",{title: "New Title", name: "Carl"});  //returns {title: "New Title", name: "Carl"} * 
+ * ```html
+ * &lt;!-- updated dom -->
+ * &lt;div n='content'>
+ *  &lt;p n='title>New Title&lt;/p>
+ *  &lt;input type='text' n='name' value='Carl'>  
+ * &lt;/div>
+ * ```
+ * @see {@link Suit.view.get }
  */
 Suit.model.data = 
 function modelData(p_target,p_value) {
@@ -441,10 +477,28 @@ function modelData(p_target,p_value) {
 };
 
 /**
- * Get/Set the correct 'value' of a given Element.
+ * Get/Set the correct 'value' of a primitive Element (i.e. input, select, ...).
  * @param {String} target - Path or reference to the target.
  * @param {?Objet} value  - Value to set the target or null if the method must only return the value.
  * @return {String|Number|Object} - Returns the raw value of the Element.
+ * @example
+ * ```html
+ * &lt;input type='text' value='Text' n='field'>
+ * &lt;input type='checkbox' checked='false' n='toggle'>
+ * ```
+ * //Get
+ * Suit.model.value("field");  //returns "Text"
+ * Suit.model.value("toggle"); //returns "false"
+ * 
+ * //Set
+ * Suit.model.value("field","New Text");  //returns "New Text"
+ * Suit.model.value("toggle",true);        //returns "true"
+ * ```html
+ * &lt;!-- updated dom -->
+ * &lt;input type='text' value='New Text' n='field'>
+ * &lt;input type='checkbox' checked='true' n='toggle'>
+ * ```
+ * @see {@link Suit.view.get }
  */
 Suit.model.value = 
 function modelValue(p_target,p_value) {
@@ -534,7 +588,12 @@ Suit.view = {};
 
 /**
  * Variable that defines the naming style of the views. Defaults to 'n'.
- * @type {String}	     
+ * @type {String}	 
+ * @example
+ * Suit.nameAttrib = "vname";
+ * ```html
+ * &lt;div vname='view-name'>&lt;/div>
+ * ```    
  */
 Suit.view.nameAttrib = "n";
 
@@ -543,6 +602,21 @@ Suit.view.nameAttrib = "n";
  * @param  {String|Element} p_target - View element to be renamed.
  * @param  {String} p_value - Name of the view element.
  * @returns {String} - The view element's name.
+ * @example
+ * ```html
+ * &lt;div n='parent>
+ *      &lt;div n='child'>&lt;/div>
+ * &lt;/div>
+ * ```
+ * Suit.view.name("parent.child");              //returns 'child'
+ * Suit.view.name("parent.child","new-child");  //returns 'new-child'
+ * ```html
+ * &lt;!-- updated dom -->
+ * &lt;div n='parent>
+ *      &lt;div n='new-child'>&lt;/div>
+ * &lt;/div>
+ * ```
+ * @see {@link Suit.view.get }
  */
 Suit.view.name =
 function viewName(p_target,p_value) {
@@ -1174,7 +1248,7 @@ Suit.request.json.post =  function requestJsonPost(p_url,p_callback,p_data,p_hea
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Mar 20 2016 15:53:30 GMT-0300 (E. South America Standard Time)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 22 2016 02:42:22 GMT-0300 (Hora oficial do Brasil)
         </footer>
     </div>
 </div>

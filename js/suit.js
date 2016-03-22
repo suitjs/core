@@ -10,21 +10,35 @@ var Suit = {};
 
 console.log("Suit> Init v1.0.0");
 
-/** 
-* Checks the validity of a value or if it matches the specified type then returns itself or a default value.
-* @param {Object} p_value - Target
-* @param {Object} p_default - Default value
-* @param {?String} p_type - Type of the target to be matched.
-* @return {Object} - If 'target' is null or not of 'type' (when used) returns the 'default' value.
-*/
+/**
+ * Checks the validity of a value or if it matches the specified type then returns itself or a default value.
+ * @param {Object} p_value - Target
+ * @param {Object} p_default - Default value
+ * @param {?String} p_type - Type of the target to be matched.
+ * @return {Object} - If 'target' is null or not of 'type' (when used) returns the 'default' value.
+ * @example 
+ * var s = null;
+ * Suit.assert(s,"default");          //returns 'default'
+ * s = "ok";
+ * Suit.assert(s,"default");          //returns 'ok'
+ * Suit.assert(s,"default","Number"); //returns 'default'
+ * Suit.assert(s,"default","String"); //returns 'ok'
+ */
 Suit.assert =
 function suitAssert(p_value,p_default,p_type) { return p_type==null ? (p_value==null ? p_default : p_value) : ((typeof(p_value)==p_type) ? p_value : p_default); };
 
 /** 
-* Checks if a given string is either null or empty.
-* @param {String} p_string - String value.	
-* @return {Boolean} - Flag indicating if the string is null or empty.
-*/
+ * Checks if a given string is either null or empty.
+ * @param {String} p_string - String value.	
+ * @return {Boolean} - Flag indicating if the string is null or empty.
+ * @example
+ * var s = "";
+ * Suit.isNullOrEmpty(s); //returns true
+ * s = null;
+ * Suit.isNullOrEmpty(s); //returns true
+ * s = "ok";
+ * Suit.isNullOrEmpty(s); //returns false
+ */
 Suit.isNullOrEmpty =
 function suitIsNullOrEmpty(p_string) { if(p_string=="") return true; if(p_string==null) return true; return false; };
 
@@ -101,6 +115,28 @@ Suit.model = {};
  * @param {String|Element} target - Path or reference to the target.
  * @param {?Object} value - Value to set the target or null if the method must only return the value.
  * @return {Object} - Returns the Object formatted data of the Element instance.
+ * @example
+ * ```html
+ * <div n='content'>
+ *  <p n='title>Title</p>
+ *  <input type='text' n='name' value='John'>  
+ * </div>
+ * ```
+ * //Get
+ * Suit.model.data("content");       //returns {title: "Title", name: "John"}
+ * Suit.model.data("content.title"); //returns "Title"
+ * Suit.model.data("content.name");  //returns "John"
+ * 
+ * //Set
+ * Suit.model.data("content",{title: "New Title", name: "Carl"});  //returns {title: "New Title", name: "Carl"} * 
+ * ```html
+ * <!-- updated dom -->
+ * <div n='content'>
+ *  <p n='title>New Title</p>
+ *  <input type='text' n='name' value='Carl'>  
+ * </div>
+ * ```
+ * @see {@link Suit.view.get }
  */
 Suit.model.data = 
 function modelData(p_target,p_value) {
@@ -116,10 +152,28 @@ function modelData(p_target,p_value) {
 };
 
 /**
- * Get/Set the correct 'value' of a given Element.
+ * Get/Set the correct 'value' of a primitive Element (i.e. input, select, ...).
  * @param {String} target - Path or reference to the target.
  * @param {?Objet} value  - Value to set the target or null if the method must only return the value.
  * @return {String|Number|Object} - Returns the raw value of the Element.
+ * @example
+ * ```html
+ * <input type='text' value='Text' n='field'>
+ * <input type='checkbox' checked='false' n='toggle'>
+ * ```
+ * //Get
+ * Suit.model.value("field");  //returns "Text"
+ * Suit.model.value("toggle"); //returns "false"
+ * 
+ * //Set
+ * Suit.model.value("field","New Text");  //returns "New Text"
+ * Suit.model.value("toggle",true);        //returns "true"
+ * ```html
+ * <!-- updated dom -->
+ * <input type='text' value='New Text' n='field'>
+ * <input type='checkbox' checked='true' n='toggle'>
+ * ```
+ * @see {@link Suit.view.get }
  */
 Suit.model.value = 
 function modelValue(p_target,p_value) {
@@ -209,7 +263,12 @@ Suit.view = {};
 
 /**
  * Variable that defines the naming style of the views. Defaults to 'n'.
- * @type {String}	     
+ * @type {String}	 
+ * @example
+ * Suit.nameAttrib = "vname";
+ * ```html
+ * <div vname='view-name'></div>
+ * ```    
  */
 Suit.view.nameAttrib = "n";
 
@@ -218,6 +277,21 @@ Suit.view.nameAttrib = "n";
  * @param  {String|Element} p_target - View element to be renamed.
  * @param  {String} p_value - Name of the view element.
  * @returns {String} - The view element's name.
+ * @example
+ * ```html
+ * <div n='parent>
+ *      <div n='child'></div>
+ * </div>
+ * ```
+ * Suit.view.name("parent.child");              //returns 'child'
+ * Suit.view.name("parent.child","new-child");  //returns 'new-child'
+ * ```html
+ * <!-- updated dom -->
+ * <div n='parent>
+ *      <div n='new-child'></div>
+ * </div>
+ * ```
+ * @see {@link Suit.view.get }
  */
 Suit.view.name =
 function viewName(p_target,p_value) {
