@@ -347,7 +347,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line262">line 262</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line257">line 257</a>
         </div>
         
     </div>
@@ -494,7 +494,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line383">line 383</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line427">line 427</a>
         </div>
         
     </div>
@@ -610,6 +610,13 @@
     
     
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Suit.view.html#.get"><code>Suit.view.get</code></a></li>
+        </ul>
+    </dd>
+    
     
     
 </dl>
@@ -657,6 +664,19 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><pre class="prettyprint source lang-html"><code>&lt;div n='parent'>
+ &lt;div n='child'>
+     &lt;div n='child2'>&lt;/div>
+ &lt;/div>
+&lt;/div>
+&lt;div n='other'>&lt;/div></code></pre><p>var p = Suit.view.get(&quot;parent&quot;);<br>var c = Suit.view.get(&quot;parent.child&quot;);<br>Suit.view.contains(&quot;parent.child&quot;,c);           //Returns true<br>Suit.view.contains(p,&quot;parent.child.child2&quot;);    //Returns true<br>Suit.view.contains(&quot;parent.child&quot;,&quot;other&quot;);     //Returns false</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -670,7 +690,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line320">line 320</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line333">line 333</a>
         </div>
         
     </div>
@@ -798,6 +818,13 @@
     
     
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Suit.view.html#.name"><code>Suit.view.name</code></a></li>
+        </ul>
+    </dd>
+    
     
     
 </dl>
@@ -845,6 +872,20 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><pre class="prettyprint source lang-html"><code>&lt;div n='container'>
+ &lt;div n='title'>Title&lt;/div>
+ &lt;form n='form'>
+     &lt;input type='text' n='field'>
+     &lt;button n='button'>Send&lt;/button>
+ &lt;/form>
+&lt;/div></code></pre><p>var form = Suit.view.get(&quot;container.form&quot;);          //Gets [form]<br>var button = Suit.view.get(&quot;button&quot;,form);           //Gets [button] starting at [form]<br>button = Suit.view.get(&quot;button&quot;,&quot;container.form&quot;&quot;);  //Gets [button] starting at [form] (same as above).<br>button.onclick = function() {<br> var field = Suit.view.get(&quot;container.form.field&quot;); //Gets [input]<br> console.log(field.value);<br>}</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -858,7 +899,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line296">line 296</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line291">line 291</a>
         </div>
         
     </div>
@@ -1052,7 +1093,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line418">line 418</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line499">line 499</a>
         </div>
         
     </div>
@@ -1142,6 +1183,15 @@
     
     
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Suit.view.html#.get"><code>Suit.view.get</code></a></li>
+        
+            <li><a href="Suit.view.html#.query"><code>Suit.view.query</code></a></li>
+        </ul>
+    </dd>
+    
     
     
 </dl>
@@ -1189,6 +1239,21 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><pre class="prettyprint source lang-html"><code>&lt;div n='a'>
+ &lt;div n='b'>
+     &lt;div class='empty'>
+         &lt;div n='c'>&lt;/div>
+     &lt;/div>
+ &lt;/div>
+&lt;/div>
+&lt;div n='other'>&lt;/div></code></pre><p>var a = Suit.view.get(&quot;a&quot;);<br>var b = Suit.view.get(&quot;a.b&quot;);<br>var e = Suit.view.query(&quot;.empty&quot;)[0]; //[div] without name<br>Suit.view.parent(&quot;a.b&quot;) == a;         //true<br>Suit.view.parent(b) == a;             //true<br>Suit.view.parent(&quot;a.b.c&quot;) == b;       //true (will skip the empty [div])<br>Suit.view.parent(e) == b;             //true (will go up until first view Element)</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -1202,7 +1267,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line352">line 352</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line381">line 381</a>
         </div>
         
     </div>
@@ -1360,6 +1425,15 @@
     
     
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Suit.view.html#.get"><code>Suit.view.get</code></a></li>
+        
+            <li><a href="Suit.view.html#.name"><code>Suit.view.name</code></a></li>
+        </ul>
+    </dd>
+    
     
     
 </dl>
@@ -1407,6 +1481,20 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><pre class="prettyprint source lang-html"><code>&lt;div class='ctn' n='container'>
+ &lt;div n='title'>Title&lt;/div>
+ &lt;form n='form'>
+     &lt;input class='ff' type='text' n='field'>
+     &lt;button n='button'>Send&lt;/button>
+ &lt;/form>
+&lt;/div></code></pre><p>var input = document.querySelector(&quot;.ff&quot;);           //Gets [input]<br>var container = document.querySelector(&quot;.ctn&quot;);      //Gets [container]<br>console.log(Suit.view.path(input));                  //Returns 'container.form.field'<br>console.log(Suit.view.path(input,container,&quot;/&quot;));    //Returns 'form/field'</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -1420,7 +1508,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line400">line 400</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line461">line 461</a>
         </div>
         
     </div>
@@ -1592,6 +1680,23 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><pre class="prettyprint source lang-html"><code>&lt;div class='ctn' n='container'> 
+ &lt;ul n='list0'>
+    &lt;li>A&lt;/li>
+    &lt;li>B&lt;/li>      
+ &lt;/ul>
+ &lt;ul n='list1'>
+    &lt;li>C&lt;/li>
+    &lt;li>D&lt;/li>      
+ &lt;/ul>
+&lt;/div></code></pre><p>//Similar to document.querySelectorAll()<br>Suit.view.query(&quot;li&quot;);                   //Returns a [li] Array with (A,B,C,D).<br>Suit.view.query(&quot;li&quot;,&quot;container.list1&quot;); //Returns a [li] Array with (C,D) (starts at 'list1').<br>Suit.view.query(&quot;.container&quot;);           //Returns an empty Array [] ('query' never returns null)</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -1605,7 +1710,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line451">line 451</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line551">line 551</a>
         </div>
         
     </div>
@@ -1804,6 +1909,25 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><pre class="prettyprint source lang-html"><code>&lt;div n='a'>
+ &lt;div n='b'> 
+     &lt;div n='c'>&lt;/div>
+ &lt;/div>
+ &lt;div n='d'> 
+     &lt;div n='e'>
+         &lt;div n='f'>&lt;/div>
+     &lt;/div>     
+ &lt;/div>
+&lt;/div>
+&lt;div n='other'>&lt;/div></code></pre><p>//Will visit ([body],a,b,c,d,e,f) (Depth First Search)<br>Suit.view.traverse(document.body,function(p_node,p_args) { ... },false, {some: &quot;data&quot;});</p>
+<p>//Will visit ([body],a,d,b,e,f) (Breadth First Search)<br>Suit.view.traverse(document.body,function(p_node,p_args) { ... },true, {some: &quot;data&quot;});</p></code></pre>
+    
+
+    
 </dd>
 
         </dl>
@@ -1829,7 +1953,7 @@
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 22 2016 14:55:13 GMT-0300 (E. South America Standard Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 22 2016 20:15:41 GMT-0300 (E. South America Standard Time)
         </footer>
     </div>
 </div>

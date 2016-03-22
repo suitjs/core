@@ -347,7 +347,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line633">line 633</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line804">line 804</a>
         </div>
         
     </div>
@@ -452,7 +452,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line692">line 692</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line906">line 906</a>
         </div>
         
     </div>
@@ -557,6 +557,9 @@
             
                 
 <span class="param-type"><a href="global.html#RequestCallback">RequestCallback</a></span>
+|
+
+<span class="param-type">String</span>
 
 
             
@@ -571,7 +574,7 @@
                         
                     
                 
-                <p>Reference to the callback function to handle this request.</p></td>
+                <p>Reference to the callback function to handle this request or notification string that all controllers will receive.</p></td>
         </tr>
 	
 	
@@ -599,7 +602,7 @@
                         
                     
                 
-                <p>Type of the response.</p></td>
+                <p>Type of the response <code>text,arraybuffer,blob,document,json</code> - <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType">See More </a>.</p></td>
         </tr>
 	
 	
@@ -747,6 +750,26 @@
     
     
     
+        <h5>Examples</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>//================ DOWNLOAD ================<br>//Will create a POST request expecting a json that don't send any data and don't define custom headers.<br>var xhr = Suit.request.create(&quot;POST&quot;,&quot;http://webservice.com/&quot;,function(p_data,p_progress,p_event){<br> if(p_progress&gt;=1.0){ //100%<br>     console.log(data); // { some: json: { data: &quot;yay&quot; } } }<br> }<br> else {<br>     bar.style.width = (p_progress * 100.0)+&quot;px&quot;; //progress feedback on some element.<br> }<br>},&quot;json&quot;,null,null);</p>
+<p>var c = {<br> on: function (n) {<br>     switch (n.path) {<br>         case &quot;some.load@progress&quot;:  console.log(n.data.progress)     break; //progress number<br>         case &quot;some.load@load&quot;:      console.log(n.data.data);        break; //Uint8Array<br>         case &quot;some.load@error&quot;:     console.log(n.data.event);       break; //error event<br>     }<br> }<br>};</p>
+<p>Suit.controller.add(c);</p>
+<p>Suit.request.create(&quot;GET&quot;,&quot;http://webservice.com&quot;,&quot;some.load&quot;,&quot;arraybuffer&quot;); //Starts the loading using notification string as callback.</p></code></pre>
+    
+
+
+    
+    <pre class="prettyprint"><code><p>//================ UPLOAD ================<br>Suit.request.create(&quot;POST&quot;,&quot;http://webservice.com/&quot;,function(p_data,p_progress,p_event) {<br> if(p_progress&lt;0.0) { //Upload progress goes from -1.0 to 0.0<br>   var p = p_progress+1.0; //convert to [0;1] range<br>   bar.style.width = Math.floor(p*100.0)+&quot;px&quot;;<br> }</p>
+<p> if(p_progress&gt;=0.0) { //Download progress goes from 0.0 to 1.0<br>   var p = p_progress; //use as it is<br>   bar.style.width = Math.floor(p*100.0)+&quot;px&quot;;<br> } </p>
+<p> if(p_progress&gt;=1.0) {    //Upload and Download finished.<br>     console.log(p_data);<br> }</p>
+<p>}, { data: &quot;content&quot;, index: 10 }); //Object data will pass thru Json.stringify().</p>
+<p>//Check the docs for the allowed data types that can be sent.</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -760,7 +783,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line784">line 784</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line1004">line 1004</a>
         </div>
         
     </div>
@@ -952,6 +975,13 @@
     
     
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Suit.request.html#.create"><code>Suit.request.create</code></a></li>
+        </ul>
+    </dd>
+    
     
     
 </dl>
@@ -999,6 +1029,14 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>//Using 'create'<br>Suit.request.create(&quot;GET&quot;,&quot;http://webservice.com&quot;,function(d,p,e){...},&quot;text&quot;);<br>//Using the shortcut<br>Suit.request.get(&quot;http://webservice.com&quot;,function(d,p,e){...});</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -1012,7 +1050,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line794">line 794</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line1020">line 1020</a>
         </div>
         
     </div>
@@ -1204,6 +1242,13 @@
     
     
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Suit.request.html#.create"><code>Suit.request.create</code></a></li>
+        </ul>
+    </dd>
+    
     
     
 </dl>
@@ -1251,6 +1296,14 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>//Using 'create'<br>Suit.request.create(&quot;POST&quot;,&quot;http://webservice.com&quot;,function(d,p,e){...},&quot;text&quot;);<br>//Using the shortcut<br>Suit.request.post(&quot;http://webservice.com&quot;,function(d,p,e){...});</p></code></pre>
+    
+
+    
 </dd>
 
         </dl>
@@ -1276,7 +1329,7 @@
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 22 2016 14:55:13 GMT-0300 (E. South America Standard Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 22 2016 20:15:41 GMT-0300 (E. South America Standard Time)
         </footer>
     </div>
 </div>

@@ -347,7 +347,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line496">line 496</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line596">line 596</a>
         </div>
         
     </div>
@@ -427,7 +427,7 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id=".list"><span class="type-signature static">static</span>Suit.controller.list<span class="type-signature type array.<object>">Array.&lt;Object></span> </h4>
+        <h4 class="name" id=".list"><span class="type-signature static">static</span>Suit.controller.list<span class="type-signature type array.<controller>">Array.&lt;<a href="global.html#Controller">Controller</a>></span> </h4>
     </div>
     
     
@@ -480,12 +480,12 @@
     <div class="nameContainer">
         <h4 class="name" id=".add">
             
-            <span class="type-signature static">static</span>Suit.controller.add<span class="signature">(p_target, p_view)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{Object}</span>
+            <span class="type-signature static">static</span>Suit.controller.add<span class="signature">(p_target, p_view)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="global.html#Controller">Controller</a>}</span>
         </h4>
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line510">line 510</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line657">line 657</a>
         </div>
         
     </div>
@@ -533,7 +533,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type"><a href="global.html#Controller">Controller</a></span>
 
 
             
@@ -642,7 +642,7 @@
             
             <td class="type">
             
-                        Object
+                        <a href="global.html#Controller">Controller</a>
                         
                     
             </td>
@@ -657,6 +657,19 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>var homeController = {<br> allow:      [&quot;click&quot;,&quot;change&quot;,&quot;input&quot;], //defaults to these events. Can be 'null'<br> enabled:    true,                       //defaults to true. Can be 'null'<br> view:       null,                       //starts 'null' but, after added to a view, holds its view reference (no need to declare splicitly)<br> on:<br> function(n) {                           //callback to handle events parsed as 'ControllerNotification'<br>     switch(n.path) {<br>         case &quot;welcome&quot;:<br>         //Entry point for all controllers.<br>         break;</p>
+<pre class="prettyprint source"><code>     case &quot;path.to.view@click&quot;:
+     //Captured 'click' event inside/including 'this.view'
+     break;
+ }</code></pre><p> }<br>};</p>
+<p>Suit.controller.add(homeController);                //Will attach a Controller to 'document.body'.<br>Suit.controller.add(homeController,&quot;path.to.view&quot;); //Will remove it from 'document.body' and attach it to a view at 'path.to.view'</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -670,7 +683,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line616">line 616</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line787">line 787</a>
         </div>
         
     </div>
@@ -741,7 +754,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line596">line 596</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line767">line 767</a>
         </div>
         
     </div>
@@ -879,6 +892,22 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>var c = {<br> on: function(n){<br>     switch(n.path) {</p>
+<pre class="prettyprint source"><code> case &quot;some.event&quot;: console.log(&quot;some event&quot;); break;
+ case &quot;some.event@hi&quot;: console.log(&quot;hi! &quot;+n.data.msg);     break;
+
+ }</code></pre><p> }<br>};</p>
+<p>Suit.controller.add(c);</p>
+<p>Suit.controller.dispatch(&quot;some.event&quot;);                  //Will log 'some event'.<br>Suit.controller.dispatch(&quot;some.event@hi&quot;,{msg: &quot;John&quot;}); //Will log 'hi! John'.</p>
+<p>c.enabled = false;</p>
+<p>Suit.controller.dispatch(&quot;some.event&quot;);                  //No log.</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -892,7 +921,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line565">line 565</a>
+            <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html">js/suit.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_core_js_suit.doc.js.html#line716">line 716</a>
         </div>
         
     </div>
@@ -1026,6 +1055,14 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>var c = {...};<br>Suit.controller.add(c);      //Suit.controller.list.length == 1<br>Suit.controller.remove(c);   //Suit.controller.list.length == 0</p></code></pre>
+    
+
+    
 </dd>
 
         </dl>
@@ -1051,7 +1088,7 @@
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 22 2016 14:55:13 GMT-0300 (E. South America Standard Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 22 2016 20:15:41 GMT-0300 (E. South America Standard Time)
         </footer>
     </div>
 </div>

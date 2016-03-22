@@ -54,12 +54,9 @@ owl = function onSuitWindowLoad(e) {
 ==================================================
 =================== Suit Model ===================
 ==================================================
-Class that implements the Model functionalities.
 */
 
-/**
-Internal callback for 'data' method traversing.
-//*/
+//Internal callback for 'data' method traversing.
 var m_modelDataTraverseCb =
 function m_modelDataTraverseCb(e,a) {
 
@@ -240,9 +237,7 @@ function modelValue(p_target,p_value) {
 Class that implements the View functionalities.
 */
 
-/**
-Utility function to avoid new 'function' instances while searching.
-//*/
+//Utility function to avoid new 'function' instances while searching.
 var m_viewGetTraverseCb =
 function m_viewGetTraverseCb(e,a) {	
 
@@ -315,7 +310,25 @@ function viewName(p_target,p_value) {
  * @function
  * @param  {String|Element} p_target - Path to the element or the element itself.
  * @param  {?(String|Element)} p_root - Start point of the path search. Defaults to [body].
- * @returns {Object} - The view element located at 'target' path or 'target' itself. 
+ * @returns {Object} - The view element located at 'target' path or 'target' itself.
+ * @example
+ * ```html
+ * <div n='container'>
+ *  <div n='title'>Title</div>
+ *  <form n='form'>
+ *      <input type='text' n='field'>
+ *      <button n='button'>Send</button>
+ *  </form>
+ * </div>
+ * ``` 
+ * var form = Suit.view.get("container.form");          //Gets [form]
+ * var button = Suit.view.get("button",form);           //Gets [button] starting at [form]
+ * button = Suit.view.get("button","container.form"");  //Gets [button] starting at [form] (same as above).
+ * button.onclick = function() {
+ *  var field = Suit.view.get("container.form.field"); //Gets [input]
+ *  console.log(field.value);
+ * }
+ * @see {@link Suit.view.name } 
  */
 Suit.view.get =
 function viewGet(p_target,p_root) {
@@ -348,6 +361,22 @@ function viewGet(p_target,p_root) {
  * @param  {?(String|Element)} p_root - Start point to search for 'target'. Defaults to [body].
  * @param  {?String} p_separator - String separator for the resulting path.
  * @returns {String} - The path for 'target' separated by the chosen 'separator'.
+ * @example
+ * ```html
+ * <div class='ctn' n='container'>
+ *  <div n='title'>Title</div>
+ *  <form n='form'>
+ *      <input class='ff' type='text' n='field'>
+ *      <button n='button'>Send</button>
+ *  </form>
+ * </div>
+ * ```
+ * var input = document.querySelector(".ff");           //Gets [input]
+ * var container = document.querySelector(".ctn");      //Gets [container]
+ * console.log(Suit.view.path(input));                  //Returns 'container.form.field'
+ * console.log(Suit.view.path(input,container,"/"));    //Returns 'form/field'
+ * @see {@link Suit.view.get }
+ * @see {@link Suit.view.name }
  */
 Suit.view.path =
 function viewPath(p_target,p_root,p_separator) {
@@ -378,7 +407,22 @@ function viewPath(p_target,p_root,p_separator) {
  * @function
  * @param  {String|Element} p_view
  * @param  {String|Element} p_child         
- * @returns {Boolean} - Flag indicating if 'view' is inside 'target'. 
+ * @returns {Boolean} - Flag indicating if 'view' is inside 'target'.
+ * @example
+ * ```html
+ * <div n='parent'>
+ *  <div n='child'>
+ *      <div n='child2'></div>
+ *  </div>
+ * </div>
+ * <div n='other'></div>
+ * ```
+ * var p = Suit.view.get("parent");
+ * var c = Suit.view.get("parent.child");
+ * Suit.view.contains("parent.child",c);           //Returns true
+ * Suit.view.contains(p,"parent.child.child2");    //Returns true
+ * Suit.view.contains("parent.child","other");     //Returns false
+ * @see {@link Suit.view.get }
  */
 Suit.view.contains = 
 function viewContains(p_view,p_child) {
@@ -396,6 +440,23 @@ function viewContains(p_view,p_child) {
  * @param  {String} p_query - Selector query.
  * @param  {?(String|Element)} p_target - Target view to apply the query. Defaults to [body]
  * @returns {Element[]} - List of zero or more results.
+ * @example 
+ * ```html
+ * <div class='ctn' n='container'> 
+ *  <ul n='list0'>
+ *     <li>A</li>
+ *     <li>B</li>      
+ *  </ul>
+ *  <ul n='list1'>
+ *     <li>C</li>
+ *     <li>D</li>      
+ *  </ul>
+ * </div>
+ * ```
+ * //Similar to document.querySelectorAll()
+ * Suit.view.query("li");                   //Returns a [li] Array with (A,B,C,D).
+ * Suit.view.query("li","container.list1"); //Returns a [li] Array with (C,D) (starts at 'list1').
+ * Suit.view.query(".container");           //Returns an empty Array [] ('query' never returns null)
  */
 Suit.view.query =
 function viewQuery(p_query,p_target) {
@@ -414,6 +475,26 @@ function viewQuery(p_query,p_target) {
  * Returns the first parent element which is a Suit's View element (i.e. have a name attrib).
  * @param  {String|Element} p_target - Target to have its parent checked.
  * @returns {Element} - The reference to the parent element of 'target'.
+ * @example
+ * ```html
+ * <div n='a'>
+ *  <div n='b'>
+ *      <div class='empty'>
+ *          <div n='c'></div>
+ *      </div>
+ *  </div>
+ * </div>
+ * <div n='other'></div>
+ * ```
+ * var a = Suit.view.get("a");
+ * var b = Suit.view.get("a.b");
+ * var e = Suit.view.query(".empty")[0]; //[div] without name
+ * Suit.view.parent("a.b") == a;         //true
+ * Suit.view.parent(b) == a;             //true
+ * Suit.view.parent("a.b.c") == b;       //true (will skip the empty [div])
+ * Suit.view.parent(e) == b;             //true (will go up until first view Element)
+ * @see {@link Suit.view.get }
+ * @see {@link Suit.view.query }
  */
 Suit.view.parent =
 function viewParent(p_target) {
@@ -447,6 +528,25 @@ function viewParent(p_target) {
  * @param  {ViewTraverseCallback} p_callback - Callback to handle each element visit.
  * @param  {?Boolean} p_bfs - Flag that indicates if Breadth First Search will be used.
  * @param  {?Object} p_args - Extra data passed in each callback call.
+ * @example
+ * ```html
+ * <div n='a'>
+ *  <div n='b'> 
+ *      <div n='c'></div>
+ *  </div>
+ *  <div n='d'> 
+ *      <div n='e'>
+ *          <div n='f'></div>
+ *      </div>     
+ *  </div>
+ * </div>
+ * <div n='other'></div>
+ * ```
+ * //Will visit ([body],a,b,c,d,e,f) (Depth First Search)
+ * Suit.view.traverse(document.body,function(p_node,p_args) { ... },false, {some: "data"});
+ * 
+ * //Will visit ([body],a,d,b,e,f) (Breadth First Search)
+ * Suit.view.traverse(document.body,function(p_node,p_args) { ... },true, {some: "data"});
  */
 Suit.view.traverse =
 function viewTraverse(p_target, p_callback, p_bfs,p_args) {
@@ -497,15 +597,62 @@ Suit.controller = {};
 
 /**
  * List of registered controllers.
- * @type {Object[]}
+ * @type {Controller[]}
  */
 Suit.controller.list = [];
 
 /**
+ * Callback called when a notification arrives on a Controller.
+ * @callback ControllerCallback
+ * @param {ControllerNotification} p_notification - Notification containing the call information.
+ */
+
+/**
+ * SuitJS Controller.
+ * @typedef {Object} Controller
+ * @property {?String[]} allow - List of events handled by this Controller. Defaults to ['click','change','input']
+ * @property {?Boolean} enabled - Flag that allows events to trigger the 'on' callback. Defaults to 'true'
+ * @property {Element} view - Reference to the 'view' Element whom this Controller is attached.
+ * @property {ControllerCallback} on - Method that handles the 'view' and global notifications.     
+ */
+
+/**
+ * Controller Notification.
+ * @typedef {Object} ControllerNotification
+ * @property {?String} type - Type of the event that generated this notification. Can be 'empty' if called from 'Suit.controller.dispatch'.
+ * @property {?Event} src - Reference to the event which generated this notification. Can be 'null' if called from 'Suit.controller.dispatch'.
+ * @property {?String} view - String path to the view/Element where this event was generated.
+ * @property {?String} path - String containing the complete event path. It can be either 'path.to.event@type' or only 'path.to.event'. 
+ * @property {?Object} data - Extra data that can be attached to this notification. More common on hand made dispatches.     
+ */
+
+/**
  * Attaches a controller to the pool.
- * @param  {Object} p_target - Reference to the controller instance.
+ * @param  {Controller} p_target - Reference to the controller instance.
  * @param  {?(String|Element)} p_view - Path or Reference to the view element to be watched.
- * @returns {Object} - Reference to the added controller.
+ * @returns {Controller} - Reference to the added controller.
+ * @example
+ * var homeController = {
+ *  allow:      ["click","change","input"], //defaults to these events. Can be 'null'
+ *  enabled:    true,                       //defaults to true. Can be 'null'
+ *  view:       null,                       //starts 'null' but, after added to a view, holds its view reference (no need to declare splicitly)
+ *  on:         
+ *  function(n) {                           //callback to handle events parsed as 'ControllerNotification'
+ *      switch(n.path) {
+ *          case "welcome":
+ *          //Entry point for all controllers.
+ *          break;
+ * 
+ *          case "path.to.view@click":
+ *          //Captured 'click' event inside/including 'this.view'
+ *          break;
+ *      }
+ *  }
+ * };
+ * 
+ * Suit.controller.add(homeController);                //Will attach a Controller to 'document.body'.
+ * Suit.controller.add(homeController,"path.to.view"); //Will remove it from 'document.body' and attach it to a view at 'path.to.view'
+ * 
  */
 Suit.controller.add =
 function controllerAdd(p_target,p_view) {
@@ -561,6 +708,10 @@ function controllerAdd(p_target,p_view) {
  * Removes the controller from the pool.
  * @param  {Object} p_target - Reference to the controller instance.
  * @returns {Object} - Reference to the removed controller.
+ * @example
+ * var c = {...};
+ * Suit.controller.add(c);      //Suit.controller.list.length == 1
+ * Suit.controller.remove(c);   //Suit.controller.list.length == 0
  */
 Suit.controller.remove =
 function controllerRemove(p_target) {
@@ -592,6 +743,26 @@ function controllerRemove(p_target) {
  * The format of the 'path' can be either 'path.to.event' or 'path.to.event@type'
  * @param  {String} p_path - String with a path that describes the event context.
  * @param  {?Object} p_data - Extra data to be passed to the event.
+ * @example
+ * var c = {
+ *  on: function(n){
+ *      switch(n.path) {
+ *      
+ *      case "some.event": console.log("some event"); break;
+ *      case "some.event@hi": console.log("hi! "+n.data.msg);     break;
+ * 
+ *      }
+ *  }
+ * };
+ * 
+ * Suit.controller.add(c);
+ * 
+ * Suit.controller.dispatch("some.event");                  //Will log 'some event'.
+ * Suit.controller.dispatch("some.event@hi",{msg: "John"}); //Will log 'hi! John'.
+ * 
+ * c.enabled = false;
+ * 
+ * Suit.controller.dispatch("some.event");                  //No log.
  */
 Suit.controller.dispatch =
 function controllerDispatch(p_path,p_data) {
@@ -632,17 +803,13 @@ Class that implements requests utility functions.
 */
 Suit.request = {};
 
-/**
-Receives a ProgressEvent and returns the normalized progress scaled by a factor.
-//*/
+//Receives a ProgressEvent and returns the normalized progress ([0;1] range).
 var m_requestGetProgress = 
 function requestGetProgress(p_event,p_scale) {
 	return (p_event.total <= 0? 0 : p_event.loaded / (p_event.total + 5));
 };
 
-/**
-Invokes the Suit Request's callback or dispatches a controller event.
-//*/
+//Invokes the Suit Request's callback or dispatches a controller event.
 var m_requestCallbackInvoke =
 function requestCallbackInvoke(p_callback,p_is_string,p_data,p_progress,p_event) {
 
@@ -683,11 +850,58 @@ function requestCallbackInvoke(p_callback,p_is_string,p_data,p_progress,p_event)
  * Create and execute a XmlHttpRequest and invokes the callback with the needed feedback of the process.
  * @param  {String} p_method - Request method (GET, POST,...)
  * @param  {String} p_url - URL
- * @param  {RequestCallback} p_callback - Reference to the callback function to handle this request.
- * @param  {String} p_response - Type of the response. 
+ * @param  {RequestCallback|String} p_callback - Reference to the callback function to handle this request or notification string that all controllers will receive.
+ * @param  {String} p_response - Type of the response `text,arraybuffer,blob,document,json` - {@link https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType See More }. 
  * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
  * @param  {?Object} p_headers - Object containing custom headers.
  * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ * @example
+ * //================ DOWNLOAD ================
+ * //Will create a POST request expecting a json that don't send any data and don't define custom headers.
+ * var xhr = Suit.request.create("POST","http://webservice.com/",function(p_data,p_progress,p_event){
+ *  if(p_progress>=1.0){ //100%
+ *      console.log(data); // { some: json: { data: "yay" } } }
+ *  }
+ *  else {
+ *      bar.style.width = (p_progress * 100.0)+"px"; //progress feedback on some element.
+ *  } 
+ * },"json",null,null);
+ * 
+ * var c = {
+ *  on: function (n) {     
+ *      switch (n.path) {
+ *          case "some.load@progress":  console.log(n.data.progress)     break; //progress number          
+ *          case "some.load@load":      console.log(n.data.data);        break; //Uint8Array
+ *          case "some.load@error":     console.log(n.data.event);       break; //error event
+ *      }
+ *  }
+ * };
+ * 
+ * Suit.controller.add(c);
+ * 
+ * Suit.request.create("GET","http://webservice.com","some.load","arraybuffer"); //Starts the loading using notification string as callback.
+ * 
+ * @example
+ * //================ UPLOAD ================
+ * Suit.request.create("POST","http://webservice.com/",function(p_data,p_progress,p_event) {
+ *  if(p_progress<0.0) { //Upload progress goes from -1.0 to 0.0
+ *    var p = p_progress+1.0; //convert to [0;1] range
+ *    bar.style.width = Math.floor(p*100.0)+"px";
+ *  }
+ * 
+ *  if(p_progress>=0.0) { //Download progress goes from 0.0 to 1.0
+ *    var p = p_progress; //use as it is
+ *    bar.style.width = Math.floor(p*100.0)+"px";
+ *  } 
+ * 
+ *  if(p_progress>=1.0) {    //Upload and Download finished.
+ *      console.log(p_data);
+ *  }
+ * 
+ * }, { data: "content", index: 10 }); //Object data will pass thru Json.stringify().
+ * 
+ * //Check the docs for the allowed data types that can be sent.
+ * 
  */
 Suit.request.create =
 function requestCreate(p_method,p_url,p_callback,p_response, p_data,p_headers) {
@@ -780,6 +994,12 @@ function requestCreate(p_method,p_url,p_callback,p_response, p_data,p_headers) {
  * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
  * @param  {?Object} p_headers - Object containing custom headers.
  * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ * @example
+ * //Using 'create'
+ * Suit.request.create("GET","http://webservice.com",function(d,p,e){...},"text"); 
+ * //Using the shortcut
+ * Suit.request.get("http://webservice.com",function(d,p,e){...});
+ * @see {@link Suit.request.create} 
  */
 Suit.request.get = function requestGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"text",p_data,p_headers);	};
 
@@ -790,6 +1010,12 @@ Suit.request.get = function requestGet(p_url,p_callback,p_data,p_headers) { retu
  * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
  * @param  {?Object} p_headers - Object containing custom headers.
  * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ * @example
+ * //Using 'create'
+ * Suit.request.create("POST","http://webservice.com",function(d,p,e){...},"text"); 
+ * //Using the shortcut
+ * Suit.request.post("http://webservice.com",function(d,p,e){...});
+ * @see {@link Suit.request.create}
  */
 Suit.request.post = function requestPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"text",p_data,p_headers);	};
 
@@ -810,6 +1036,12 @@ Suit.request.binary = {};
  * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
  * @param  {?Object} p_headers - Object containing custom headers.
  * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ * @example
+ * //Using 'create'
+ * Suit.request.create("GET","http://webservice.com",function(d,p,e){...},"arraybuffer"); 
+ * //Using the shortcut
+ * Suit.request.binary.get("http://webservice.com",function(d,p,e){...});
+ * @see {@link Suit.request.create}
  */
 Suit.request.binary.get  =   function requestBinaryGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"arraybuffer",p_data,p_headers);	};
 
@@ -820,6 +1052,11 @@ Suit.request.binary.get  =   function requestBinaryGet(p_url,p_callback,p_data,p
  * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
  * @param  {?Object} p_headers - Object containing custom headers.
  * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ * @example
+ * //Using 'create'
+ * Suit.request.create("POST","http://webservice.com",function(d,p,e){...},"arraybuffer"); 
+ * //Using the shortcut
+ * Suit.request.binary.post("http://webservice.com",function(d,p,e){...});
  */
 Suit.request.binary.post =   function requestBinaryPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"arraybuffer",p_data,p_headers);	};
 
@@ -836,6 +1073,11 @@ Suit.request.blob = {};
  * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
  * @param  {?Object} p_headers - Object containing custom headers.
  * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ * @example
+ * //Using 'create'
+ * Suit.request.create("GET","http://webservice.com",function(d,p,e){...},"blob"); 
+ * //Using the shortcut
+ * Suit.request.blob.get("http://webservice.com",function(d,p,e){...});
  */
 Suit.request.blob.get  =  function requestBlobGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"blob",p_data,p_headers);	};
 
@@ -846,6 +1088,11 @@ Suit.request.blob.get  =  function requestBlobGet(p_url,p_callback,p_data,p_head
  * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
  * @param  {?Object} p_headers - Object containing custom headers.
  * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ * @example
+ * //Using 'create'
+ * Suit.request.create("POST","http://webservice.com",function(d,p,e){...},"blob"); 
+ * //Using the shortcut
+ * Suit.request.blob.post("http://webservice.com",function(d,p,e){...});
  */
 Suit.request.blob.post =  function requestBlobPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"blob",p_data,p_headers);	};
 
@@ -862,6 +1109,11 @@ Suit.request.document = {};
  * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
  * @param  {?Object} p_headers - Object containing custom headers.
  * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ * @example
+ * //Using 'create'
+ * Suit.request.create("GET","http://webservice.com",function(d,p,e){...},"document"); 
+ * //Using the shortcut
+ * Suit.request.document.get("http://webservice.com",function(d,p,e){...});
  */
 Suit.request.document.get  =  function requestDocumentGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"document",p_data,p_headers);	};
 
@@ -872,6 +1124,11 @@ Suit.request.document.get  =  function requestDocumentGet(p_url,p_callback,p_dat
  * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
  * @param  {?Object} p_headers - Object containing custom headers.
  * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ * @example
+ * //Using 'create'
+ * Suit.request.create("POST","http://webservice.com",function(d,p,e){...},"document"); 
+ * //Using the shortcut
+ * Suit.request.document.post("http://webservice.com",function(d,p,e){...});
  */
 Suit.request.document.post =  function requestDocumentPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"document",p_data,p_headers);	};
 
@@ -888,6 +1145,11 @@ Suit.request.json = {};
  * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
  * @param  {?Object} p_headers - Object containing custom headers.
  * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ * @example
+ * //Using 'create'
+ * Suit.request.create("GET","http://webservice.com",function(d,p,e){...},"json"); 
+ * //Using the shortcut
+ * Suit.request.json.get("http://webservice.com",function(d,p,e){...});
  */
 Suit.request.json.get  =  function requestJsonGet(p_url,p_callback,p_data,p_headers) { return Suit.request.create("get",p_url,p_callback,"json",p_data,p_headers);	};
 
@@ -898,6 +1160,11 @@ Suit.request.json.get  =  function requestJsonGet(p_url,p_callback,p_data,p_head
  * @param  {?(ArrayBuffer|FormElement|String|Object|Blob)} p_data - Data to be sent.
  * @param  {?Object} p_headers - Object containing custom headers.
  * @returns {XmlHttpRequest} - Reference to the created XmlHttpRequest object.
+ * @example
+ * //Using 'create'
+ * Suit.request.create("POST","http://webservice.com",function(d,p,e){...},"json"); 
+ * //Using the shortcut
+ * Suit.request.json.post("http://webservice.com",function(d,p,e){...});
  */
 Suit.request.json.post =  function requestJsonPost(p_url,p_callback,p_data,p_headers) { return Suit.request.create("post",p_url,p_callback,"json",p_data,p_headers);	};
 
