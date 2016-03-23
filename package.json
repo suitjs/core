@@ -1,6 +1,6 @@
 {
   "name": "suitjs",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "SuitJS core features.", 
   
   "repository": {
@@ -15,6 +15,13 @@
   "homepage": "http://www.suitjs.com",
   "dependencies": {
     
+  },
+  "scripts": {
+    "build-docs":   "jsdoc ./js/suit.doc.js -d docs/deploy/ -t docs/template/ -c docs/template/conf.json -r README.md",
+    "build-js":     "uglifyjs js/suit.doc.js -b -o js/suit.js && uglifyjs js/suit.doc.js -o js/suit.min.js",
+    "build-haxe":   "haxe build.hxml",
+    "serve":        "http-server ./ -p 8081",
+    "build":        "npm run build-docs && npm run build-js"   
   },
   "contributors": [
     "Gustavo Allebrandt <gustavoallebrandt@gmail.com"

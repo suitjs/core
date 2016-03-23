@@ -61,7 +61,7 @@ Suit.controller.add(simpleController);
 ```
 #### View
 The first step in the project is to organize page Elements which are relevant.  
-The ones with important roles are defined **Views**.
+The ones with important roles are defined as **Views**.
   
 Use the `n` attribute in tags that should be considered **View** instances.
 ```html
@@ -70,12 +70,14 @@ Use the `n` attribute in tags that should be considered **View** instances.
     <!-- View -->
     <div n='panel'>
         ...
+        <!-- View -->
         <div n='title'>Panel</div>
     </div>
     <p>Text</p>
     <!-- View -->
     <div n='footer'>
         ...
+        <!-- View -->
         <a n='link'>Link</a>
     </div>    
   </div>

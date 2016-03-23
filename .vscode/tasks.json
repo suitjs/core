@@ -10,11 +10,11 @@
 	"version": "0.1.0",
 
 	// The command is tsc. Assumes that tsc has been installed using npm install -g typescript
-	"command": "cmd",
+	"command": "npm",
     
-    "isShellCommand": false,
+    "isShellCommand": true,
     
-    "args": ["/C ${workspaceRoot}/tools/build.bat"],
+    "args": ["run","build"],
 
 	// Show the output window only if unrecognized errors occur.
 	"showOutput": "silent"
