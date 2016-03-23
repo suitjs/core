@@ -8,7 +8,6 @@ Enjoy a comfortable workflow that allows:
 * Fast methods for download and upload of data.
 
 # Install
-___   
 #### Download
 * Download either the `suitjs.js` or `suitjs.min.js` sources.
 * Add the tag `<script src="js/suit.js"></script>`
@@ -23,7 +22,6 @@ ___
 * TBD
 
 # Usage
-___  
 After adding the script tag, the `Suit` global variable will be available.  
 Your application workflow will be centered in `Controller` instances. 
 #### Hello World
@@ -236,9 +234,7 @@ For more detailed information on **Request** features.  Check the **[documentati
 
 
 # Documentation
-___
 For in depth information of the API, visit the **[documentation](http://www.suitjs.com/docs/core/)**. 
 
 # Examples
-___
 Usage examples can be found at **[CodePen](http://codepen.io/collection/XOyEpq/)**.
