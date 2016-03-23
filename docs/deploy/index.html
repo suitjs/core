@@ -339,7 +339,189 @@
 
     <section>
         <article class="readme"><p><a target="_blank" href="http://www.suitjs.com/"><img src="http://www.suitjs.com/img/logo-suitjs.svg?v=2" width="256" alt="SuitJS"></a></p>
-<p>A comfortable MVC framework.</p></article>
+<p>A MVC framework easy to install and use.<br>Enjoy a comfortable workflow that allows:</p>
+<ul>
+<li>Bidirectional data conversion between DOM and Object.</li>
+<li>Improved DOM organization and querying.</li>
+<li>Simple communication flow between Views and Controllers.</li>
+<li>Fast methods for download and upload of data.</li>
+</ul>
+<h1>Install</h1><hr>
+<h4>Download</h4><ul>
+<li>Download either the <code>suitjs.js</code> or <code>suitjs.min.js</code> sources.</li>
+<li>Add the tag <code>&lt;script src=&quot;js/suit.js&quot;&gt;&lt;/script&gt;</code></li>
+</ul>
+<h4>Bower</h4><ul>
+<li>SuitJs is available as bower package.</li>
+<li>Run <code>bower install suitjs</code></li>
+<li>It will install all script versions.</li>
+<li>Add the tag <code>&lt;script src=&quot;bower_components/suitjs/js/suitjs.js&quot;&gt;&lt;/script&gt;</code></li>
+</ul>
+<h4>CDN</h4><ul>
+<li>TBD</li>
+</ul>
+<h1>Usage</h1><hr>
+<p>After adding the script tag, the <code>Suit</code> global variable will be available.<br>Your application workflow will be centered in <code>Controller</code> instances. </p>
+<h4>Hello World</h4><p>Given the HTML.</p>
+<pre class="prettyprint source lang-html"><code>&lt;div n='content'>
+    &lt;button n='button'>Click&lt;/button>
+&lt;/div></code></pre><pre class="prettyprint source lang-js"><code>//Defines a Controller.
+var simpleController = {
+    //Method that handles notifications from other Views and Controllers.
+    on: function(n) {
+        switch(n.path) {
+
+            case &quot;welcome&quot;:                 //Entry point notification.            
+                console.log(&quot;Thank You!&quot;);
+                //Start Here.
+            break;
+
+            case &quot;bye&quot;:                     //Custom notification.            
+                console.log(&quot;See You Again!&quot;);
+            break;
+
+            case &quot;content.button@click&quot;:    //DOM notification            
+                //Sends a custom notification to all registered controllers (including itself).
+                Suit.controller.dispatch(&quot;bye&quot;);            
+            break;
+        }
+    }
+};
+
+//Adds the Controller to the pool.
+Suit.controller.add(simpleController);</code></pre><h4>View</h4><p>The first step in the project is to organize page Elements which are relevant.<br>The ones with important roles are defined <strong>Views</strong>.</p>
+<p>Use the <code>n</code> attribute in tags that should be considered <strong>View</strong> instances.</p>
+<pre class="prettyprint source lang-hmtl"><code>  &lt;!-- regular layout element -->
+  &lt;div>
+    &lt;!-- View -->
+    &lt;div n='panel'>
+        ...
+        &lt;div n='title'>Panel&lt;/div>
+    &lt;/div>
+    &lt;p>Text&lt;/p>
+    &lt;!-- View -->
+    &lt;div n='footer'>
+        ...
+        &lt;a n='link'>Link&lt;/a>
+    &lt;/div>    
+  &lt;/div></code></pre><p> These elements can later be manipulated using the <code>Suit.view</code> class.  </p>
+<p> <code>Suit.view.get(&quot;panel.title&quot;); //returns &lt;div n='title'&gt;Panel&lt;/div&gt;</code></p>
+<p>Use this class to query and use any HTMLElement tagged as View. </p>
+<p>For more detailed information on <strong>View</strong> features.  Check the <strong><a target="_blank" href="http://suitjs.com/docs/core/Suit.view.html">documentation</a></strong>.</p>
+<h4>Model</h4><p>Sometimes applications have to extract information from the DOM and arrange it to store or send to servers.<br>The usual steps are:</p>
+<ul>
+<li>Query the Element(s).</li>
+<li>Extract their content.</li>
+<li>Convert the data to Object.  </li>
+</ul>
+<p>The API offers a quick way to fetch this data and also to update the DOM with new data in one quick step.<br>Given this example HTML.  </p>
+<pre class="prettyprint source lang-html"><code>&lt;div n='content'>
+ &lt;p n='title>Title&lt;/p>
+ &lt;input type='text' n='name' value='John'>  
+&lt;/div></code></pre><p>Then using SuitJS.</p>
+<pre class="prettyprint source lang-js"><code>//Get
+Suit.model.data(&quot;content&quot;);       //returns {title: &quot;Title&quot;, name: &quot;John&quot;}
+Suit.model.data(&quot;content.title&quot;); //returns &quot;Title&quot;
+Suit.model.data(&quot;content.name&quot;);  //returns &quot;John&quot;
+//Set
+Suit.model.data(&quot;content&quot;,{title: &quot;New Title&quot;, name: &quot;Carl&quot;});  //returns {title: &quot;New Title&quot;, name: &quot;Carl&quot;}</code></pre><p>We can easily avoid the hassle of reading {HTML, Input, Form}Elements and extracting their data.</p>
+<p>For more detailed information on <strong>Model</strong> features.  Check the <strong><a target="_blank" href="http://suitjs.com/docs/core/Suit.model.html">documentation</a></strong>.</p>
+<h4>Controller</h4><p>Now that we can fetch our Views and get/set their data, the last step is to wire up our application.<br>The Controller instance offers a way easily handle both DOMEvents and in-application communications.  </p>
+<p>Controllers are responsible for handling:</p>
+<ul>
+<li>Events that bubble up from the DOM.</li>
+<li>Notifications sent using <code>Suit.controller.dispatch</code>.</li>
+</ul>
+<p>Given the HTML.</p>
+<pre class="prettyprint source lang-html"><code>&lt;div n='content'>
+    &lt;div n='article'>
+        &lt;input n='field' type='text' value='Insert Text'>
+        &lt;button n='send'>Send&lt;/button>
+    &lt;/div>    
+    &lt;div n='footer'>
+        &lt;button n='cancel'>Cancel&lt;/button>
+    &lt;/div>      
+&lt;/div></code></pre><p>One example setup can be:</p>
+<pre class="prettyprint source lang-js"><code>//Handles hi-level notifications.
+var contentController = {
+  on: function(n) { 
+      switch(n) {
+          case &quot;welcome&quot;:        /*Initialize*/   break;          
+          case &quot;article-send&quot;:
+            var d = Suit.model.data(&quot;content.article.field&quot;); //Gets the &lt;input> value.
+            //send(d);
+          break;     
+
+          case &quot;article-cancel&quot;:
+            Suit.model.data(&quot;content.article.field&quot;,&quot;&quot;); //clears the &lt;input>
+          break;
+
+          //Can also handle the @click.
+          //But it must 'case' the whole path to the View which generated the event.
+          case &quot;content.article.send@click&quot;: break; 
+
+      }
+  }  
+};
+
+//Handles notifications for the 'article' context.
+var articleController = {
+  on: function(n) { 
+      switch(n) {
+          case &quot;send@click&quot;:
+            Suit.controller.dispatch(&quot;article-send&quot;); //Relay notification to all controllers.
+          break;          
+      }
+  }     
+};
+
+//Handles notifications for the 'footer' context.
+var footerController = {
+  on: function(n) { 
+      switch(n) {
+          case &quot;cancel@click&quot;:
+            Suit.controller.dispatch(&quot;article-cancel&quot;); //Relay notification to all controllers.
+          break;          
+      }
+  }     
+};
+
+Suit.controller.add(contentController);                     //Added to &lt;body> context.
+Suit.controller.add(articleController,&quot;content.article&quot;);   //Added to &lt;div n='article'> context.
+Suit.controller.add(footerController,&quot;content.footer&quot;);     //Added to &lt;div n='footer'> context.</code></pre><p>For more detailed information on <strong>Controller</strong> features.  Check the <strong><a target="_blank" href="http://suitjs.com/docs/core/Suit.controller.html">documentation</a></strong>.</p>
+<h4>Requests</h4><p>Lastly, SuitJS offer methods to speed up the creation of <code>XmlHttpRequest</code> calls and event handling.  </p>
+<p>The overall method to create requests is <code>Suit.request.create</code>.<br>It allows the creation of requests with all parameters available.<br>Example.  </p>
+<pre class="prettyprint source lang-js"><code>//================ DOWNLOAD ================
+//Will create a POST request expecting a json that don't send any data and don't define custom headers.
+var xhr = Suit.request.create(&quot;POST&quot;,&quot;http://webservice.com/&quot;,function(p_data,p_progress,p_event){
+ if(p_progress>=1.0){ //100%
+     console.log(data); // { some: json: { data: &quot;yay&quot; } } }
+ }
+ else {
+     bar.style.width = (p_progress * 100.0)+&quot;px&quot;; //progress feedback on some element.
+ }
+},&quot;json&quot;,null,null);
+
+//================ UPLOAD ================
+Suit.request.create(&quot;POST&quot;,&quot;http://webservice.com/&quot;,function(p_data,p_progress,p_event) {
+ if(p_progress&lt;0.0) { //Upload progress goes from -1.0 to 0.0
+   var p = p_progress+1.0; //convert to [0;1] range
+   bar.style.width = Math.floor(p*100.0)+&quot;px&quot;;
+ }
+ if(p_progress>=0.0) { //Download progress goes from 0.0 to 1.0
+   var p = p_progress; //use as it is
+   bar.style.width = Math.floor(p*100.0)+&quot;px&quot;;
+ } 
+ if(p_progress>=1.0) {    //Upload and Download finished.
+     console.log(p_data);
+ }
+}, { data: &quot;content&quot;, index: 10 }); //Object data will pass thru Json.stringify().
+//Check the docs for the allowed data types that can be sent.</code></pre><p>Also, there are several shortcut methods to <strong>load/upload</strong> data using <strong>GET/POST</strong> and receiving data in <strong>different data formats</strong>.  </p>
+<p>For more detailed information on <strong>Request</strong> features.  Check the <strong><a target="_blank" href="http://suitjs.com/docs/core/Suit.request.html">documentation</a></strong>.</p>
+<h1>Documentation</h1><hr>
+<p>For in depth information of the API, visit the <strong><a target="_blank" href="http://www.suitjs.com/docs/core/">documentation</a></strong>. </p>
+<h1>Examples</h1><hr>
+<p>Usage examples can be found at <strong><a target="_blank" href="http://codepen.io/collection/XOyEpq/">CodePen</a></strong>.</p></article>
     </section>
 
 
@@ -356,7 +538,7 @@
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 22 2016 20:15:41 GMT-0300 (E. South America Standard Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Mar 23 2016 04:18:06 GMT-0300 (Hora oficial do Brasil)
         </footer>
     </div>
 </div>

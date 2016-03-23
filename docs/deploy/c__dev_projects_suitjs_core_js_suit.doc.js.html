@@ -1,4 +1,329 @@
-/**
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>SuitJS - Core</title>
+    
+    <meta name="description" content="Core classes for the SuitJS framework." />
+    
+        <meta name="keywords" content="javascript,framework,mvc,suitjs,haxe,typescript" />
+        <meta name="keyword" content="javascript,framework,mvc,suitjs,haxe,typescript" />
+    
+    
+    
+    <meta property="og:title" content="SuitJS - Core"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="http://www.suitjs.com/img/logo-suitjs.svg?v=2"/>
+    <meta property="og:site_name" content="SuitJS - Core"/>
+    <meta property="og:url" content="http://suitjs.com/docs/core/"/>
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+    <link rel="icon" type="image/png" href="http://suitjs.com/favicon.png">
+    
+    
+    <script>
+    var config = {"monospaceLinks":true,"cleverLinks":true,"applicationName":"SuitJS - Core","navigationImage":"http://www.suitjs.com/img/logo-64.png","linenums":true,"disqus":"suitjs","googleAnalytics":"UA-75143185-1","default":{"outputSourceFiles":true},"openGraph":{"title":"SuitJS - Core","type":"website","image":"http://www.suitjs.com/img/logo-suitjs.svg?v=2","site_name":"SuitJS - Core","url":"http://suitjs.com/docs/core/"},"meta":{"title":"SuitJS - Core","description":"Core classes for the SuitJS framework.","keyword":"javascript,framework,mvc,suitjs,haxe,typescript"},"link":{"favicon":"http://suitjs.com/favicon.png"}};
+    </script>
+    
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', config.googleAnalytics]);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+
+    <div style="text-align: center; margin-top: 5px;">
+        <img src="http://www.suitjs.com/img/logo-64.png" alt="SuitJS - Core" style="display: inline">
+    </div>
+
+    <h3 class="applicationName"><a href="index.html">SuitJS - Core</a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="Suit">
+            <span class="title">
+                <a href="Suit.html">Suit</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="Suit.assert"><a href="Suit.html#.assert">assert</a></li>
+            
+                <li data-name="Suit.isNullOrEmpty"><a href="Suit.html#.isNullOrEmpty">isNullOrEmpty</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Suit.controller">
+            <span class="title">
+                <a href="Suit.controller.html">Suit.controller</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="Suit.controller.list"><a href="Suit.controller.html#.list">list</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="Suit.controller.add"><a href="Suit.controller.html#.add">add</a></li>
+            
+                <li data-name="Suit.controller.clear"><a href="Suit.controller.html#.clear">clear</a></li>
+            
+                <li data-name="Suit.controller.dispatch"><a href="Suit.controller.html#.dispatch">dispatch</a></li>
+            
+                <li data-name="Suit.controller.remove"><a href="Suit.controller.html#.remove">remove</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Suit.model">
+            <span class="title">
+                <a href="Suit.model.html">Suit.model</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="Suit.model.data"><a href="Suit.model.html#.data">data</a></li>
+            
+                <li data-name="Suit.model.value"><a href="Suit.model.html#.value">value</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Suit.request">
+            <span class="title">
+                <a href="Suit.request.html">Suit.request</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="Suit.request.create"><a href="Suit.request.html#.create">create</a></li>
+            
+                <li data-name="Suit.request.get"><a href="Suit.request.html#.get">get</a></li>
+            
+                <li data-name="Suit.request.post"><a href="Suit.request.html#.post">post</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Suit.request.binary">
+            <span class="title">
+                <a href="Suit.request.binary.html">Suit.request.binary</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="Suit.request.binary.get"><a href="Suit.request.binary.html#.get">get</a></li>
+            
+                <li data-name="Suit.request.binary.post"><a href="Suit.request.binary.html#.post">post</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Suit.request.blob">
+            <span class="title">
+                <a href="Suit.request.blob.html">Suit.request.blob</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="Suit.request.blob.get"><a href="Suit.request.blob.html#.get">get</a></li>
+            
+                <li data-name="Suit.request.blob.post"><a href="Suit.request.blob.html#.post">post</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Suit.request.document">
+            <span class="title">
+                <a href="Suit.request.document.html">Suit.request.document</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="Suit.request.document.get"><a href="Suit.request.document.html#.get">get</a></li>
+            
+                <li data-name="Suit.request.document.post"><a href="Suit.request.document.html#.post">post</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Suit.request.json">
+            <span class="title">
+                <a href="Suit.request.json.html">Suit.request.json</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="Suit.request.json.get"><a href="Suit.request.json.html#.get">get</a></li>
+            
+                <li data-name="Suit.request.json.post"><a href="Suit.request.json.html#.post">post</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Suit.view">
+            <span class="title">
+                <a href="Suit.view.html">Suit.view</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="Suit.view.nameAttrib"><a href="Suit.view.html#.nameAttrib">nameAttrib</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="Suit.view.contains"><a href="Suit.view.html#.contains">contains</a></li>
+            
+                <li data-name="Suit.view.get"><a href="Suit.view.html#.get">get</a></li>
+            
+                <li data-name="Suit.view.name"><a href="Suit.view.html#.name">name</a></li>
+            
+                <li data-name="Suit.view.parent"><a href="Suit.view.html#.parent">parent</a></li>
+            
+                <li data-name="Suit.view.path"><a href="Suit.view.html#.path">path</a></li>
+            
+                <li data-name="Suit.view.query"><a href="Suit.view.html#.query">query</a></li>
+            
+                <li data-name="Suit.view.traverse"><a href="Suit.view.html#.traverse">traverse</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+    <div class="main">
+        <h1 class="page-title" data-filename="c__dev_projects_suitjs_core_js_suit.doc.js.html">Source: c:/dev/projects/suitjs/core/js/suit.doc.js</h1>
+        
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Class that implements the Suit's core framework features.
  * @class
  * @type Suit
@@ -64,7 +389,7 @@ function m_modelDataTraverseCb(e,a) {
 	if (Suit.isNullOrEmpty(Suit.view.name(it))) return;
 	
 	var hasChildren = true;
-	if (it.children.length <= 0) 				hasChildren = false;
+	if (it.children.length &lt;= 0) 				hasChildren = false;
 	if (it.nodeName.toLowerCase() == "select")  hasChildren = false;
 
 	if (!hasChildren)	{					
@@ -74,7 +399,7 @@ function m_modelDataTraverseCb(e,a) {
 		var d  = a.res;
 		var dv = a.value;
 
-		for (var i=0;i<tks.length;i++) {
+		for (var i=0;i&lt;tks.length;i++) {
 
 			if (i >= (tks.length - 1)) {						
 
@@ -114,10 +439,10 @@ Suit.model = {};
  * @return {Object} - Returns the Object formatted data of the Element instance.
  * @example
  * ```html
- * <div n='content'>
- *  <p n='title>Title</p>
- *  <input type='text' n='name' value='John'>  
- * </div>
+ * &lt;div n='content'>
+ *  &lt;p n='title>Title&lt;/p>
+ *  &lt;input type='text' n='name' value='John'>  
+ * &lt;/div>
  * ```
  * //Get
  * Suit.model.data("content");       //returns {title: "Title", name: "John"}
@@ -127,11 +452,11 @@ Suit.model = {};
  * //Set
  * Suit.model.data("content",{title: "New Title", name: "Carl"});  //returns {title: "New Title", name: "Carl"} 
  * ```html
- * <!-- updated dom -->
- * <div n='content'>
- *  <p n='title>New Title</p>
- *  <input type='text' n='name' value='Carl'>  
- * </div>
+ * &lt;!-- updated dom -->
+ * &lt;div n='content'>
+ *  &lt;p n='title>New Title&lt;/p>
+ *  &lt;input type='text' n='name' value='Carl'>  
+ * &lt;/div>
  * ```
  * @see {@link Suit.view.get }
  */
@@ -155,8 +480,8 @@ function modelData(p_target,p_value) {
  * @return {String|Number|Object} - Returns the raw value of the Element.
  * @example
  * ```html
- * <input type='text' value='Text' n='field'>
- * <input type='checkbox' checked='false' n='toggle'>
+ * &lt;input type='text' value='Text' n='field'>
+ * &lt;input type='checkbox' checked='false' n='toggle'>
  * ```
  * //Get
  * Suit.model.value("field");  //returns "Text"
@@ -166,9 +491,9 @@ function modelData(p_target,p_value) {
  * Suit.model.value("field","New Text");  //returns "New Text"
  * Suit.model.value("toggle",true);        //returns "true"
  * ```html
- * <!-- updated dom -->
- * <input type='text' value='New Text' n='field'>
- * <input type='checkbox' checked='true' n='toggle'>
+ * &lt;!-- updated dom -->
+ * &lt;input type='text' value='New Text' n='field'>
+ * &lt;input type='checkbox' checked='true' n='toggle'>
  * ```
  * @see {@link Suit.view.get }
  */
@@ -208,14 +533,14 @@ function modelValue(p_target,p_value) {
 			var ol  = Suit.view.query("option",n);
 			var res = [];					
 			
-			for(var i=0;i<ol.length;i++) if(ol[i].selected==true) res.push(i);
+			for(var i=0;i&lt;ol.length;i++) if(ol[i].selected==true) res.push(i);
 
 			if(v==null) return res;
 
 			var vl  = Array.isArray(v) ? v : [];
 
-			for(var i=0;i<res.length;i++) { var o = ol[res[i]]; if(o!=null)o.selected = false }
-			for(var i=0;i<vl.length;i++)  { var o = ol[vl[i]];  if(o!=null)o.selected = true  }
+			for(var i=0;i&lt;res.length;i++) { var o = ol[res[i]]; if(o!=null)o.selected = false }
+			for(var i=0;i&lt;vl.length;i++)  { var o = ol[vl[i]];  if(o!=null)o.selected = true  }
 
 			return res;
 		}
@@ -262,7 +587,7 @@ Suit.view = {};
  * @example
  * Suit.nameAttrib = "vname";
  * ```html
- * <div vname='view-name'></div>
+ * &lt;div vname='view-name'>&lt;/div>
  * ```    
  */
 Suit.view.nameAttrib = "n";
@@ -274,17 +599,17 @@ Suit.view.nameAttrib = "n";
  * @returns {String} - The view element's name.
  * @example
  * ```html
- * <div n='parent>
- *      <div n='child'></div>
- * </div>
+ * &lt;div n='parent>
+ *      &lt;div n='child'>&lt;/div>
+ * &lt;/div>
  * ```
  * Suit.view.name("parent.child");              //returns 'child'
  * Suit.view.name("parent.child","new-child");  //returns 'new-child'
  * ```html
- * <!-- updated dom -->
- * <div n='parent>
- *      <div n='new-child'></div>
- * </div>
+ * &lt;!-- updated dom -->
+ * &lt;div n='parent>
+ *      &lt;div n='new-child'>&lt;/div>
+ * &lt;/div>
  * ```
  * @see {@link Suit.view.get }
  */
@@ -313,13 +638,13 @@ function viewName(p_target,p_value) {
  * @returns {Object} - The view element located at 'target' path or 'target' itself.
  * @example
  * ```html
- * <div n='container'>
- *  <div n='title'>Title</div>
- *  <form n='form'>
- *      <input type='text' n='field'>
- *      <button n='button'>Send</button>
- *  </form>
- * </div>
+ * &lt;div n='container'>
+ *  &lt;div n='title'>Title&lt;/div>
+ *  &lt;form n='form'>
+ *      &lt;input type='text' n='field'>
+ *      &lt;button n='button'>Send&lt;/button>
+ *  &lt;/form>
+ * &lt;/div>
  * ``` 
  * var form = Suit.view.get("container.form");          //Gets [form]
  * var button = Suit.view.get("button",form);           //Gets [button] starting at [form]
@@ -337,7 +662,7 @@ function viewGet(p_target,p_root) {
 
 	var l = p_target.split(".");
 
-	if (l.length <= 0) return null;
+	if (l.length &lt;= 0) return null;
 
 	var a = {};
 
@@ -363,13 +688,13 @@ function viewGet(p_target,p_root) {
  * @returns {String} - The path for 'target' separated by the chosen 'separator'.
  * @example
  * ```html
- * <div class='ctn' n='container'>
- *  <div n='title'>Title</div>
- *  <form n='form'>
- *      <input class='ff' type='text' n='field'>
- *      <button n='button'>Send</button>
- *  </form>
- * </div>
+ * &lt;div class='ctn' n='container'>
+ *  &lt;div n='title'>Title&lt;/div>
+ *  &lt;form n='form'>
+ *      &lt;input class='ff' type='text' n='field'>
+ *      &lt;button n='button'>Send&lt;/button>
+ *  &lt;/form>
+ * &lt;/div>
  * ```
  * var input = document.querySelector(".ff");           //Gets [input]
  * var container = document.querySelector(".ctn");      //Gets [container]
@@ -410,12 +735,12 @@ function viewPath(p_target,p_root,p_separator) {
  * @returns {Boolean} - Flag indicating if 'view' is inside 'target'.
  * @example
  * ```html
- * <div n='parent'>
- *  <div n='child'>
- *      <div n='child2'></div>
- *  </div>
- * </div>
- * <div n='other'></div>
+ * &lt;div n='parent'>
+ *  &lt;div n='child'>
+ *      &lt;div n='child2'>&lt;/div>
+ *  &lt;/div>
+ * &lt;/div>
+ * &lt;div n='other'>&lt;/div>
  * ```
  * var p = Suit.view.get("parent");
  * var c = Suit.view.get("parent.child");
@@ -442,16 +767,16 @@ function viewContains(p_view,p_child) {
  * @returns {Element[]} - List of zero or more results.
  * @example 
  * ```html
- * <div class='ctn' n='container'> 
- *  <ul n='list0'>
- *     <li>A</li>
- *     <li>B</li>      
- *  </ul>
- *  <ul n='list1'>
- *     <li>C</li>
- *     <li>D</li>      
- *  </ul>
- * </div>
+ * &lt;div class='ctn' n='container'> 
+ *  &lt;ul n='list0'>
+ *     &lt;li>A&lt;/li>
+ *     &lt;li>B&lt;/li>      
+ *  &lt;/ul>
+ *  &lt;ul n='list1'>
+ *     &lt;li>C&lt;/li>
+ *     &lt;li>D&lt;/li>      
+ *  &lt;/ul>
+ * &lt;/div>
  * ```
  * //Similar to document.querySelectorAll()
  * Suit.view.query("li");                   //Returns a [li] Array with (A,B,C,D).
@@ -465,7 +790,7 @@ function viewQuery(p_query,p_target) {
 	if (t == null) t = body;
 	var res = [];
 	var l   = t.querySelectorAll(p_query);
-	for (var i=0;i<l.length;i++) res.push(l[i]);
+	for (var i=0;i&lt;l.length;i++) res.push(l[i]);
 	return res;
 
 };
@@ -477,14 +802,14 @@ function viewQuery(p_query,p_target) {
  * @returns {Element} - The reference to the parent element of 'target'.
  * @example
  * ```html
- * <div n='a'>
- *  <div n='b'>
- *      <div class='empty'>
- *          <div n='c'></div>
- *      </div>
- *  </div>
- * </div>
- * <div n='other'></div>
+ * &lt;div n='a'>
+ *  &lt;div n='b'>
+ *      &lt;div class='empty'>
+ *          &lt;div n='c'>&lt;/div>
+ *      &lt;/div>
+ *  &lt;/div>
+ * &lt;/div>
+ * &lt;div n='other'>&lt;/div>
  * ```
  * var a = Suit.view.get("a");
  * var b = Suit.view.get("a.b");
@@ -530,17 +855,17 @@ function viewParent(p_target) {
  * @param  {?Object} p_args - Extra data passed in each callback call.
  * @example
  * ```html
- * <div n='a'>
- *  <div n='b'> 
- *      <div n='c'></div>
- *  </div>
- *  <div n='d'> 
- *      <div n='e'>
- *          <div n='f'></div>
- *      </div>     
- *  </div>
- * </div>
- * <div n='other'></div>
+ * &lt;div n='a'>
+ *  &lt;div n='b'> 
+ *      &lt;div n='c'>&lt;/div>
+ *  &lt;/div>
+ *  &lt;div n='d'> 
+ *      &lt;div n='e'>
+ *          &lt;div n='f'>&lt;/div>
+ *      &lt;/div>     
+ *  &lt;/div>
+ * &lt;/div>
+ * &lt;div n='other'>&lt;/div>
  * ```
  * //Will visit ([body],a,b,c,d,e,f) (Depth First Search)
  * Suit.view.traverse(document.body,function(p_node,p_args) { ... },false, {some: "data"});
@@ -561,11 +886,11 @@ function viewTraverse(p_target, p_callback, p_bfs,p_args) {
 		var l = [t];
 		var k = 0;
 
-		while (k < l.length) {
+		while (k &lt; l.length) {
 
 			if (p_callback(l[k],p_args)==false) return;
 
-			for (var i=0; i<l[k].children.length;i++) {
+			for (var i=0; i&lt;l[k].children.length;i++) {
 
 				l.push(l[k].children[i]);
 
@@ -579,7 +904,7 @@ function viewTraverse(p_target, p_callback, p_bfs,p_args) {
 	
 	if (p_callback(t,p_args)==false) return;
 
-	for (var i=0; i<t.children.length;i++) Suit.view.traverse(t.children[i], p_callback,p_bfs,p_args);
+	for (var i=0; i&lt;t.children.length;i++) Suit.view.traverse(t.children[i], p_callback,p_bfs,p_args);
 };
 
 /*
@@ -690,7 +1015,7 @@ function controllerAdd(p_target,p_view) {
 	
 	var al = Suit.assert(t.allow,[]);
 
-	for(var i=0;i<al.length;i++) {
+	for(var i=0;i&lt;al.length;i++) {
 
 		bb = false;
 		var s = al[i];
@@ -724,14 +1049,14 @@ function controllerRemove(p_target) {
 		if (t.view != null) {
 
 			var al = Suit.assert(t.allow,[]);
-			for(var i=0;i<al.length;i++) t.view.removeEventListener(al[i], t.handler);
+			for(var i=0;i&lt;al.length;i++) t.view.removeEventListener(al[i], t.handler);
 		}						
 	}
 	
 	t.view = null;
 
 	var idx = Suit.controller.list.indexOf(t);
-	if(idx<0)return t;
+	if(idx&lt;0)return t;
 
 	Suit.controller.list.splice(idx,1);
 
@@ -777,7 +1102,7 @@ function controllerDispatch(p_path,p_data) {
 	cev.src   = null;				
 	cev.data  = p_data;
 	var l = Suit.controller.list;
-	for (var i=0;i<l.length;i++) l[i].on(cev);
+	for (var i=0;i&lt;l.length;i++) l[i].on(cev);
 
 };
 
@@ -787,7 +1112,7 @@ function controllerDispatch(p_path,p_data) {
 Suit.controller.clear =
 function controllerClear() {
 	var l = Suit.controller.list;
-	for(var i=0;i<l.length;i++) Suit.controller.remove(l[i]);
+	for(var i=0;i&lt;l.length;i++) Suit.controller.remove(l[i]);
 };
 
 /*
@@ -806,7 +1131,7 @@ Suit.request = {};
 //Receives a ProgressEvent and returns the normalized progress ([0;1] range).
 var m_requestGetProgress = 
 function requestGetProgress(p_event,p_scale) {
-	return (p_event.total <= 0? 0 : p_event.loaded / (p_event.total + 5));
+	return (p_event.total &lt;= 0? 0 : p_event.loaded / (p_event.total + 5));
 };
 
 //Invokes the Suit Request's callback or dispatches a controller event.
@@ -823,7 +1148,7 @@ function requestCallbackInvoke(p_callback,p_is_string,p_data,p_progress,p_event)
 
 		switch(p_event.type) {
 
-			case "progress": type = p_progress<0.0 ? "upload" : "progress"; break;
+			case "progress": type = p_progress&lt;0.0 ? "upload" : "progress"; break;
 			case "load": 	 type = p_data==null ? "error" : "complete"; break;
 			case "error": 	 type = "error"; break;
 
@@ -884,7 +1209,7 @@ function requestCallbackInvoke(p_callback,p_is_string,p_data,p_progress,p_event)
  * @example
  * //================ UPLOAD ================
  * Suit.request.create("POST","http://webservice.com/",function(p_data,p_progress,p_event) {
- *  if(p_progress<0.0) { //Upload progress goes from -1.0 to 0.0
+ *  if(p_progress&lt;0.0) { //Upload progress goes from -1.0 to 0.0
  *    var p = p_progress+1.0; //convert to [0;1] range
  *    bar.style.width = Math.floor(p*100.0)+"px";
  *  }
@@ -1172,3 +1497,30 @@ Suit.request.json.post =  function requestJsonPost(p_url,p_callback,p_data,p_hea
 })(window,document,document.body);
 
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+
+
+        
+        <!-- disqus code -->
+        <div id="disqus_thread"></div>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <!-- // disqus code -->
+        
+
+        <footer>
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Mar 23 2016 04:18:06 GMT-0300 (Hora oficial do Brasil)
+        </footer>
+    </div>
+</div>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/main.js"></script>
+</body>
+</html>
