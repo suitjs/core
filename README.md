@@ -66,7 +66,7 @@ The first step in the project is to organize page Elements which are relevant.
 The ones with important roles are defined **Views**.
   
 Use the `n` attribute in tags that should be considered **View** instances.
-  ```hmtl
+```html
   <!-- regular layout element -->
   <div>
     <!-- View -->
@@ -81,7 +81,7 @@ Use the `n` attribute in tags that should be considered **View** instances.
         <a n='link'>Link</a>
     </div>    
   </div>
-  ```  
+```  
  These elements can later be manipulated using the `Suit.view` class.  
     
  `Suit.view.get("panel.title"); //returns <div n='title'>Panel</div>`
