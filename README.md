@@ -116,7 +116,7 @@ Suit.model.data("content.name");  //returns "John"
 Suit.model.data("content",{title: "New Title", name: "Carl"});  //returns {title: "New Title", name: "Carl"} 
 ```
 
-We can easily avoid the hassle of reading {HTML, Input, Form}Elements and extracting their data.
+We can easily avoid the hassle of reading [HTML, Input, Form]Elements and extracting their data.
   
 For more detailed information on **Model** features.  Check the **[documentation](http://suitjs.com/docs/core/Suit.model.html)**.
 
