@@ -4,7 +4,7 @@
   "license": "MIT",
   "tags": ["mvc","model","view","controller","mutation","bind","request","post","get","js"],
   "description": "A comfortable MVC framework.",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "releasenotes": "",
   "classPath": "haxe/",
   "contributors": ["eduardo-costa"],
