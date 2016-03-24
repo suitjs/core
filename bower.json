@@ -32,9 +32,10 @@
 	"*.hx",
 	"*.md",
 	"*.html",	
-	"*.json"		
+	"*.json",
+    "*.sh",
+    "*.hxml"		
   ],
 
-  "license": "MIT",
-  "private": false
+  "license": "MIT"  
 }
