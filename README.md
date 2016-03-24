@@ -10,7 +10,7 @@ Enjoy a comfortable workflow that allows:
 # Install
 #### Download
 * Download either the `suitjs.js` or `suitjs.min.js` sources.
-* Add the tag `<script src="js/suit.js"></script>`
+* Add the tag `<script src="js/suitjs/suit.js"></script>`
 
 #### Bower
 * SuitJs is available as bower package.
