@@ -8,7 +8,7 @@ var Suit = {};
 
 "use strict"; 	
 
-console.log("Suit> Init v1.0.0");
+console.log("Suit> Init v1.0.4");
 
 /**
  * Checks the validity of a value or if it matches the specified type then returns itself or a default value.
