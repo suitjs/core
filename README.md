@@ -21,6 +21,10 @@ Enjoy a comfortable workflow that allows:
 #### CDN
 * TBD
 
+#### Build
+* Run `npm run init` once
+* `npm run build`
+
 # Usage
 After adding the script tag, the `Suit` global variable will be available.  
 Your application workflow will be centered in `Controller` instances. 
