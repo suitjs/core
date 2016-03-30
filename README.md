@@ -236,11 +236,11 @@ Suit.request.create("POST","http://webservice.com/",function(p_data,p_progress,p
 
 Also, there are several shortcut methods to **load/upload** data using **GET/POST** and receiving data in **different data formats**.  
   
-For more detailed information on **Request** features.  Check the **[documentation](http://suitjs.com/docs/core/Suit.request.html)**.
+For more detailed information on **Request** features.  Check the **[documentation](http://suitjs.com/docs/Suit.request.html)**.
 
 
 # Documentation
-For in depth information of the API, visit the **[documentation](http://www.suitjs.com/docs/core/)**. 
+For in depth information of the API, visit the **[documentation](http://www.suitjs.com/docs/)**. 
 
 # Examples
 Usage examples can be found at **[CodePen](http://codepen.io/collection/XOyEpq/)**.
