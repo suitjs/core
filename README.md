@@ -105,7 +105,7 @@ The API offers a quick way to fetch this data and also to update the DOM with ne
 Given this example HTML.  
 ```html
 <div n='content'>
- <p n='title>Title</p>
+ <p n='title'>Title</p>
  <input type='text' n='name' value='John'>  
 </div>
 ```
