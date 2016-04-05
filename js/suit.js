@@ -79,6 +79,9 @@ var Suit = {};
                   case "range":
                     return v == null ? n.valueAsNumber : n.valueAsNumber = v;
 
+                  case "file":
+                    return v == null ? n.files : n.files = v;
+
                   default:
                     return v == null ? n.value : n.value = v;
                 }

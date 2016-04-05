@@ -191,7 +191,8 @@ function modelValue(p_target,p_value) {
 				case "checkbox": return v == null ? n.checked : (n.checked = v);     
 				case "radio":    return v == null ? n.checked : (n.checked = v);
 				case "number":   return v == null ? n.valueAsNumber  : (n.valueAsNumber  = v); 	 
-				case "range":    return v == null ? n.valueAsNumber  : (n.valueAsNumber  = v); 	 					
+				case "range":    return v == null ? n.valueAsNumber  : (n.valueAsNumber  = v);
+				case "file":	 return v == null ? n.files			 : (n.files = v); 	 					
 				default: 		 return v == null ? n.value  : (n.value = v); 	 
 
 			}						
