@@ -2,7 +2,7 @@ var Suit = {};
 
 (function(window, document, body) {
     "use strict";
-    console.log("Suit> Init v1.1.0");
+    console.log("Suit> Init v1.2.0");
     Suit.assert = function suitAssert(p_value, p_default, p_type) {
         return p_type == null ? p_value == null ? p_default : p_value : typeof p_value == p_type ? p_value : p_default;
     };
