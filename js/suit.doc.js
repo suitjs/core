@@ -8,7 +8,7 @@ var Suit = {};
 
 "use strict"; 	
 
-console.log("Suit> Init v1.0.5");
+console.log("Suit> Init v1.1.0");
 
 /**
  * Checks the validity of a value or if it matches the specified type then returns itself or a default value.
@@ -681,7 +681,12 @@ function controllerAdd(p_target,p_view) {
 			cev.view    = (e.target instanceof HTMLElement) ? Suit.view.path(e.target,v) : "";
 			cev.path	= cev.view == "" ? e.type : (e.type=="" ? cev.view : (cev.view + "@" + e.type));
 			cev.data    = null;
-			if(t.on!=null)t.on(cev);
+			if(t.on!=null) { 
+				var res = t.on(cev);
+				if(res==null) return;
+                if(typeof(res)=="string") { Suit.controller.dispatch(res); return; }
+                if(Array.isArray(res))    { Suit.controller.dispatch(Suit.assert(res[0],""),Suit.assert(res[1],null)); return; }
+			}
 
 		};
 	}
@@ -777,7 +782,12 @@ function controllerDispatch(p_path,p_data) {
 	cev.src   = null;				
 	cev.data  = p_data;
 	var l = Suit.controller.list;
-	for (var i=0;i<l.length;i++) l[i].on(cev);
+	for (var i=0;i<l.length;i++) {          
+        var res = l[i].on(cev);		
+        if(res==null) return;
+        if(typeof(res)=="string") { Suit.controller.dispatch(res); return; }
+        if(Array.isArray(res))    { Suit.controller.dispatch(Suit.assert(res[0],""),Suit.assert(res[1],null)); return; }
+    }
 
 };
 

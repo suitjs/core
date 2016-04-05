@@ -2,7 +2,7 @@ var Suit = {};
 
 (function(window, document, body) {
     "use strict";
-    console.log("Suit> Init v1.0.5");
+    console.log("Suit> Init v1.1.0");
     Suit.assert = function suitAssert(p_value, p_default, p_type) {
         return p_type == null ? p_value == null ? p_default : p_value : typeof p_value == p_type ? p_value : p_default;
     };
@@ -217,7 +217,18 @@ var Suit = {};
                 cev.view = e.target instanceof HTMLElement ? Suit.view.path(e.target, v) : "";
                 cev.path = cev.view == "" ? e.type : e.type == "" ? cev.view : cev.view + "@" + e.type;
                 cev.data = null;
-                if (t.on != null) t.on(cev);
+                if (t.on != null) {
+                    var res = t.on(cev);
+                    if (res == null) return;
+                    if (typeof res == "string") {
+                        Suit.controller.dispatch(res);
+                        return;
+                    }
+                    if (Array.isArray(res)) {
+                        Suit.controller.dispatch(Suit.assert(res[0], ""), Suit.assert(res[1], null));
+                        return;
+                    }
+                }
             };
         }
         var bb = false;
@@ -257,7 +268,18 @@ var Suit = {};
         cev.src = null;
         cev.data = p_data;
         var l = Suit.controller.list;
-        for (var i = 0; i < l.length; i++) l[i].on(cev);
+        for (var i = 0; i < l.length; i++) {
+            var res = l[i].on(cev);
+            if (res == null) return;
+            if (typeof res == "string") {
+                Suit.controller.dispatch(res);
+                return;
+            }
+            if (Array.isArray(res)) {
+                Suit.controller.dispatch(Suit.assert(res[0], ""), Suit.assert(res[1], null));
+                return;
+            }
+        }
     };
     Suit.controller.clear = function controllerClear() {
         var l = Suit.controller.list;
