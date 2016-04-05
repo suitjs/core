@@ -605,6 +605,7 @@ Suit.controller.list = [];
  * Callback called when a notification arrives on a Controller.
  * @callback ControllerCallback
  * @param {ControllerNotification} p_notification - Notification containing the call information.
+ * @returns {?(String|Array)} - A new notification String or a pair ["notification", {data}] (both will invoke Suit.controller.dispatch('notification',data))
  */
 
 /**
