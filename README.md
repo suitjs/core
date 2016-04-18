@@ -92,7 +92,7 @@ Use the `n` attribute in tags that should be considered **View** instances.
    
 Use this class to query and use any HTMLElement tagged as View. 
 
-For more detailed information on **View** features.  Check the **[documentation](http://suitjs.com/docs/core/Suit.view.html)**.
+For more detailed information on **View** features.  Check the **[documentation](http://suitjs.com/docs/Suit.view.html)**.
  
 #### Model
 Sometimes applications have to extract information from the DOM and arrange it to store or send to servers.  
@@ -122,7 +122,7 @@ Suit.model.data("content",{title: "New Title", name: "Carl"});  //returns {title
 
 We can easily avoid the hassle of reading [HTML, Input, Form]Elements and extracting their data.
   
-For more detailed information on **Model** features.  Check the **[documentation](http://suitjs.com/docs/core/Suit.model.html)**.
+For more detailed information on **Model** features.  Check the **[documentation](http://suitjs.com/docs/Suit.model.html)**.
 
 #### Controller
 
@@ -197,7 +197,7 @@ Suit.controller.add(footerController,"content.footer");     //Added to <div n='f
 
 ```
 
-For more detailed information on **Controller** features.  Check the **[documentation](http://suitjs.com/docs/core/Suit.controller.html)**.
+For more detailed information on **Controller** features.  Check the **[documentation](http://suitjs.com/docs/Suit.controller.html)**.
 
 #### Requests
 Lastly, SuitJS offer methods to speed up the creation of `XmlHttpRequest` calls and event handling.  
